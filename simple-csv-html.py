@@ -36,19 +36,22 @@ def CVStoHTML(tasks):
             sameItem = []
     return HTMLstuffing
 
-def HTMLfiller(item,stuffing):
+def HTMLfiller(item,stuffing, fpath):
     #for task in stuffing:
-    print "<html>\n<head>\n</head>\n<body>\n"
-    print "<p> Experiment </p>\n"
+    path = fpath + str(item) + ".html"
+    htmlfile = open(path, 'w')
+    htmlfile.write( "<html>\n<head>\n</head>\n<body>\n")
+    htmlfile.write( "<p> Experiment </p>\n")
     #condition, form text and question
-    print "<p>%s</p>\n<p>%s</p>\n<p>%s</p>\n" % (stuffing[item][0], stuffing[item][1], stuffing[item][2])
-    print "<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n"
-    print "</body>\n</html>"
+    htmlfile.write( "<p>%s</p>\n<p>%s</p>\n<p>%s</p>\n" % (stuffing[item][0], stuffing[item][2], stuffing[item][3]))
+    htmlfile.write( "<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n")
+    htmlfile.write( "</body>\n</html>" )
 
-tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/small_example.csv")
-for task in tasklist:
-    print task
+tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/small_example.csv")
+HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/gen/gen"
+#for task in tasklist:
+#    print task
 HTMLstuffing = CVStoHTML(tasklist)
-print HTMLstuffing
-HTMLfiller(0, HTMLstuffing)
+#print HTMLstuffings
+HTMLfiller(0, HTMLstuffing, HTMLfilepath)
 
