@@ -1,6 +1,8 @@
 import csv
 import random
 
+
+######PARSERS#######
 def parseCSV (path):
     """Parses .csv experiment file (see documentation for .csv file formatting instructions.)
        It currently has the following columns: (int) "ITEM", (string) "CONDITION",
@@ -14,7 +16,15 @@ def parseCSV (path):
     tasklist.remove(tasklist[0])
     return tasklist
 
-def getRandomItem(tasks):
+def parseAns (answerRow):
+    #answerList = []
+    #parse answerRow to answerList[] by looking up the #'s
+    answerList = answerRow.split("#")
+    print answerList
+    return answerList
+
+######CHOOSING TASKS#######
+def getRandomItem (tasks):
     """Tasks is a list of lines from the CSV file. We assume that all of the elements
        have the same item number.
        Currently, we assume that there is one condition per item.
@@ -25,7 +35,7 @@ def getRandomItem(tasks):
     """
     return random.choice(tasks)
     
-def ChooseRandomTasks(tasks):
+def ChooseRandomTasks (tasks):
     """Tasks is a list of lines from the CSV file. We shuffle all the tasks which
        have the same item number, and pass that to getRandomItem(), so that we get
        a randomly chosen task every time.
@@ -46,8 +56,9 @@ def ChooseRandomTasks(tasks):
     if sameItem:
         HTMLstuffing.append(getRandomItem(sameItem))
     return HTMLstuffing
-
-def HTMLfiller(item,stuffing, fpath):
+    
+######FILL IN THE GAPS######
+def HTMLfiller (item,stuffing, fpath):
     """This function makes the HTML code for a task with ITEM=item from the stuffing
        and pastes this code into an HTML page, which goes to a file path
        specified in fpath.
@@ -64,7 +75,7 @@ def HTMLfiller(item,stuffing, fpath):
     htmlfile.write( "<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n")
     htmlfile.write( "</body>\n</html>" )
 
-def JSgen(stuffing, path):
+def JSgen (stuffing, path):
     """This function works together with HTMLwJSgen().
        It generates a JavaScript file which has all the data of the experiment:
        the conditions tested, as well as the displayed text, question and answers.
@@ -100,18 +111,20 @@ def HTMLwJSgen (stuffing, fpath):
     htmlfile.write( "<p> Experiment </p>\n")
     #condition, form text and question
     htmlfile.write( '<p id="condition">Test Condition</p>\n<p id="text">Test Text</p>\n<p id="question">Test Question</p>\n')
-    #htmlfile.write( '<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n')
     #work on this. these should be removable, too. Until then, comment the whole Answers thing
+    #htmlfile.write( '<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n')
     htmlfile.write('<button type="button" onclick="newValue()">Next</button>')
     htmlfile.write('<script src="'+ jspath + '"></script>')
     htmlfile.write( "</body>\n</html>" )
 
+######THIS RUNS EVERYTHING######
 tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/small_example.csv")
 HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/gen/gen"
 #for task in tasklist:
 #    print task
 HTMLstuffing = ChooseRandomTasks(tasklist)
 #print HTMLstuffing
-HTMLfiller(0, HTMLstuffing, HTMLfilepath)
+#HTMLfiller(0, HTMLstuffing, HTMLfilepath)
+parseAns("Yes#No#Maybe#I don't know#Answer")
 HTMLwJSgen(HTMLstuffing, HTMLfilepath)
 
