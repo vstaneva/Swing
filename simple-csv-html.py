@@ -75,9 +75,13 @@ def JSgen(stuffing, path):
     jsfile.write('var conditions = new Array();\nvar text = new Array();\nvar questions = new Array();\n');
     #fill in the arrays -> should do by Stuffing.
     #the lines below is for testing:
-    jsfile.write('conditions[0]="Condition"; conditions[1]="New condition"; conditions[2] = "Even newer condition";\n')
-    jsfile.write('text[0]="This is some text"; text[1]="This is some more text"; text[2] = "And a here is a third example of text";\n')
-    jsfile.write('questions[0]="Why did the chicken cross the street?"; questions[1]="Do you like apples?"; questions[2] = "Who are the sultans of swing?";\n')
+    row = 0
+    for task in stuffing:
+        jsfile.write('conditions[%d]="%s";'%(row, stuffing[row][0]))
+        jsfile.write('text[%d]="%s";'%(row, stuffing[row][2]))
+        jsfile.write('questions[%d]="%s";'%(row, stuffing[row][3]))
+        jsfile.write('\n')
+        row+=1
     #testing ends
     jsfile.write("var row=0;\n")
     jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\nrow=row+1;\n}')
@@ -107,7 +111,7 @@ HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/gen/gen"
 #for task in tasklist:
 #    print task
 HTMLstuffing = ChooseRandomTasks(tasklist)
-print HTMLstuffing
+#print HTMLstuffing
 HTMLfiller(0, HTMLstuffing, HTMLfilepath)
 HTMLwJSgen(HTMLstuffing, HTMLfilepath)
 

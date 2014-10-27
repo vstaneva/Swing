@@ -1,9 +1,8 @@
 var conditions = new Array();
 var text = new Array();
 var questions = new Array();
-conditions[0]="Condition"; conditions[1]="New condition"; conditions[2] = "Even newer condition";
-text[0]="This is some text"; text[1]="This is some more text"; text[2] = "And a here is a third example of text";
-questions[0]="Why did the chicken cross the street?"; questions[1]="Do you like apples?"; questions[2] = "Who are the sultans of swing?";
+conditions[0]="1";text[0]="The editor hired the reporter.";questions[0]="Did the editor see someone?";
+conditions[1]="2";text[1]="The accountant wrote a report for the executive.";questions[1]="Did the accountant contact someone?";
 var row=0;
 function newValue(){
 document.getElementById("condition").innerHTML = conditions[row];
