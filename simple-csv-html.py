@@ -84,7 +84,7 @@ def JSgen(stuffing, path):
         row+=1
     #testing ends
     jsfile.write("var row=0;\n")
-    jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\nrow=row+1;\n}')
+    jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\nif(row<(text.length-1))row=row+1;\n}')
 
 def HTMLwJSgen (stuffing, fpath):
     """This function produces an HTML file which requires a JS external function
