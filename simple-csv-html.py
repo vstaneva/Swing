@@ -17,10 +17,8 @@ def parseCSV (path):
     return tasklist
 
 def parseAns (answerRow):
-    #answerList = []
-    #parse answerRow to answerList[] by looking up the #'s
+    """parse answerRow to answerList[] by looking up the #'s"""
     answerList = answerRow.split("#")
-    print answerList
     return answerList
 
 ######CHOOSING TASKS#######
@@ -83,19 +81,27 @@ def JSgen (stuffing, path):
        produced JS file is saved in a file as specified by path.
     """
     jsfile = open(path, 'w');
-    jsfile.write('var conditions = new Array();\nvar text = new Array();\nvar questions = new Array();\n');
+    jsfile.write('var conditions = new Array();\nvar text = new Array();\nvar questions = new Array();\nvar answerTypes = new Array();\nvar answers = new Array();\n');
     #fill in the arrays -> should do by Stuffing.
-    #the lines below is for testing:
     row = 0
     for task in stuffing:
         jsfile.write('conditions[%d]="%s";'%(row, stuffing[row][0]))
         jsfile.write('text[%d]="%s";'%(row, stuffing[row][2]))
         jsfile.write('questions[%d]="%s";'%(row, stuffing[row][3]))
+        jsfile.write('answerTypes[%d]="%s";'%(row, stuffing[row][4]))
+        jsfile.write('answers[%d]="%s";'%(row, parseAns(stuffing[row][5])))
         jsfile.write('\n')
         row+=1
-    #testing ends
     jsfile.write("var row=0;\n")
-    jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\nif(row<(text.length-1))row=row+1;\n}')
+    jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\n')
+    #here see what answers for this row are and show/hide accordingly
+    jsfile.write('if(answerTypes[row]=="Radio"){\n')
+    jsfile.write('document.getElementById("free").style.visibility="hidden";document.getElementById("check").style.visibility="hidden";document.getElementById("radio").style.visibility="visible"; ')
+    jsfile.write('}\nif(answerTypes[row]=="Check"){\n')
+    jsfile.write('document.getElementById("free").style.visibility="hidden";document.getElementById("check").style.visibility="visible";document.getElementById("radio").style.visibility="hidden"; ')
+    jsfile.write('}\nif(answerTypes[row]=="Free"){\n')
+    jsfile.write('document.getElementById("free").style.visibility="visible";document.getElementById("check").style.visibility="hidden";document.getElementById("radio").style.visibility="hidden"; ')
+    jsfile.write('}\nif(row<(text.length-1))row=row+1;\n}')
 
 def HTMLwJSgen (stuffing, fpath):
     """This function produces an HTML file which requires a JS external function
@@ -107,15 +113,20 @@ def HTMLwJSgen (stuffing, fpath):
     jspath = fpath + ".js"
     JSgen(stuffing, jspath)
     htmlfile = open(path, 'w')
-    htmlfile.write("<html>\n<head>\n</head>\n<body>\n")
-    htmlfile.write( "<p> Experiment </p>\n")
+    htmlfile.write('<html>\n<head></head>\n<body>\n')
+    htmlfile.write('<div><p> Experiment </p>\n')
     #condition, form text and question
     htmlfile.write( '<p id="condition">Test Condition</p>\n<p id="text">Test Text</p>\n<p id="question">Test Question</p>\n')
+    #radio answers
+    htmlfile.write('<p>Radio works!</p><div id="radio" style="visibility:hidden"><ul><li>Radio</li><li>Answer</li></ul></div>')
+    #checkbox answers
+    htmlfile.write('<p>Check works!</p><div id="check" style="visibility:hidden"><ul><li>Checkbox</li><li>Answer</li></ul></div>')
+    #free text answers
+    htmlfile.write('<p>Freetext works!</p><div id="free" style="visibility:hidden"><p>Free text will be here</p></div>')
     #work on this. these should be removable, too. Until then, comment the whole Answers thing
-    #htmlfile.write( '<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n')
-    htmlfile.write('<button type="button" onclick="newValue()">Next</button>')
+    htmlfile.write('<button type="button" onclick="newValue()">Next</button></div>')
     htmlfile.write('<script src="'+ jspath + '"></script>')
-    htmlfile.write( "</body>\n</html>" )
+    htmlfile.write('</body>\n</html>')
 
 ######THIS RUNS EVERYTHING######
 tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/small_example.csv")
@@ -123,8 +134,12 @@ HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/gen/gen"
 #for task in tasklist:
 #    print task
 HTMLstuffing = ChooseRandomTasks(tasklist)
-#print HTMLstuffing
+print HTMLstuffing[0]
 #HTMLfiller(0, HTMLstuffing, HTMLfilepath)
-parseAns("Yes#No#Maybe#I don't know#Answer")
+#print parseAns("Yes#No#Maybe#I don't know#Answer")
 HTMLwJSgen(HTMLstuffing, HTMLfilepath)
+
+## Strategy: What if we ALWAYS have radio button answers, a free text box, and
+## a multiple choice answers structures, but we show and hide them according
+## to what the page wants us to show.
 
