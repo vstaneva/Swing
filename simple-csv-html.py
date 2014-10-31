@@ -96,11 +96,19 @@ def JSgen (stuffing, path):
     jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\n')
     #here see what answers for this row are and show/hide accordingly
     jsfile.write('if(answerTypes[row]=="Radio"){\n')
-    jsfile.write('document.getElementById("free").style.visibility="hidden";document.getElementById("check").style.visibility="hidden";document.getElementById("radio").style.visibility="visible"; ')
+    jsfile.write('document.getElementById("free").style.visibility="hidden";\ndocument.getElementById("check").style.visibility="hidden";\ndocument.getElementById("radio").style.visibility="visible";\n')
+    jsfile.write('document.getElementById("free").style.height="0px";\ndocument.getElementById("check").style.height="0px";\ndocument.getElementById("radio").style.height="250px";\n')
+    jsfile.write('document.getElementById("radio").innerHTML="<input type=\\"radio\\" name=\\"question\\" value=\\"answer1\\">Radio<br><input type=\\"radio\\" name=\\"question\\" value=\\"answer2\\">Answer"')
+    #here make sure radio answers are displayed like radio
     jsfile.write('}\nif(answerTypes[row]=="Check"){\n')
-    jsfile.write('document.getElementById("free").style.visibility="hidden";document.getElementById("check").style.visibility="visible";document.getElementById("radio").style.visibility="hidden"; ')
+    jsfile.write('document.getElementById("free").style.visibility="hidden";\ndocument.getElementById("check").style.visibility="visible";\ndocument.getElementById("radio").style.visibility="hidden";\n')
+    jsfile.write('document.getElementById("free").style.height="0px";\ndocument.getElementById("check").style.height="250px";\ndocument.getElementById("radio").style.height="0px";\n')
+    jsfile.write('document.getElementById("check").innerHTML="<input type=\\"checkbox\\" name=\\"question\\" value=\\"answer1\\">Checkbox<br><input type=\\"checkbox\\" name=\\"question\\" value=\\"answer2\\">Answer"')
+    #here make sure ckeckboxes are displayed as checkboxes
     jsfile.write('}\nif(answerTypes[row]=="Free"){\n')
-    jsfile.write('document.getElementById("free").style.visibility="visible";document.getElementById("check").style.visibility="hidden";document.getElementById("radio").style.visibility="hidden"; ')
+    jsfile.write('document.getElementById("free").style.visibility="visible";\ndocument.getElementById("check").style.visibility="hidden";\ndocument.getElementById("radio").style.visibility="hidden";\n')
+    jsfile.write('document.getElementById("free").style.height="250px";\ndocument.getElementById("check").style.height="0px";\ndocument.getElementById("radio").style.height="0px";\n')
+    jsfile.write('document.getElementById("free").innerHTML="<input type=\\"text\\" name=\\"question\\">"')
     jsfile.write('}\nif(row<(text.length-1))row=row+1;\n}')
 
 def HTMLwJSgen (stuffing, fpath):
@@ -114,17 +122,17 @@ def HTMLwJSgen (stuffing, fpath):
     JSgen(stuffing, jspath)
     htmlfile = open(path, 'w')
     htmlfile.write('<html>\n<head></head>\n<body>\n')
-    htmlfile.write('<div><p> Experiment </p>\n')
+    htmlfile.write('<form><p> Experiment </p>\n')
     #condition, form text and question
     htmlfile.write( '<p id="condition">Test Condition</p>\n<p id="text">Test Text</p>\n<p id="question">Test Question</p>\n')
     #radio answers
-    htmlfile.write('<p>Radio works!</p><div id="radio" style="visibility:hidden"><ul><li>Radio</li><li>Answer</li></ul></div>')
+    htmlfile.write('<div id="radio" style="visibility:hidden height:0px">Radio</div>')
     #checkbox answers
-    htmlfile.write('<p>Check works!</p><div id="check" style="visibility:hidden"><ul><li>Checkbox</li><li>Answer</li></ul></div>')
+    htmlfile.write('<div id="check" style="visibility:hidden height:0px">Checkbox</div>')
     #free text answers
-    htmlfile.write('<p>Freetext works!</p><div id="free" style="visibility:hidden"><p>Free text will be here</p></div>')
+    htmlfile.write('<div id="free" style="visibility:hidden height:0px">Free text</div>')
     #work on this. these should be removable, too. Until then, comment the whole Answers thing
-    htmlfile.write('<button type="button" onclick="newValue()">Next</button></div>')
+    htmlfile.write('<button type="button" onclick="newValue()">Next</button></form>')
     htmlfile.write('<script src="'+ jspath + '"></script>')
     htmlfile.write('</body>\n</html>')
 
