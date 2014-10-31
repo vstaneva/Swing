@@ -19,6 +19,7 @@ def parseCSV (path):
 def parseAns (answerRow):
     """parse answerRow to answerList[] by looking up the #'s"""
     answerList = answerRow.split("#")
+    print answerList
     return answerList
 
 ######CHOOSING TASKS#######
@@ -89,22 +90,27 @@ def JSgen (stuffing, path):
         jsfile.write('text[%d]="%s";'%(row, stuffing[row][2]))
         jsfile.write('questions[%d]="%s";'%(row, stuffing[row][3]))
         jsfile.write('answerTypes[%d]="%s";'%(row, stuffing[row][4]))
-        jsfile.write('answers[%d]="%s";'%(row, parseAns(stuffing[row][5])))
+        jsfile.write('answers[%d]=%s;'%(row, parseAns(stuffing[row][5])))
         jsfile.write('\n')
         row+=1
-    jsfile.write("var row=0;\n")
+    jsfile.write("var row=0, radioAnswerList=\"\", checkAnswerList = \"\";\n")
     jsfile.write('function newValue(){\ndocument.getElementById("condition").innerHTML = conditions[row];\ndocument.getElementById("text").innerHTML = text[row];\ndocument.getElementById("question").innerHTML = questions[row];\n')
     #here see what answers for this row are and show/hide accordingly
     jsfile.write('if(answerTypes[row]=="Radio"){\n')
     jsfile.write('document.getElementById("free").style.visibility="hidden";\ndocument.getElementById("check").style.visibility="hidden";\ndocument.getElementById("radio").style.visibility="visible";\n')
     jsfile.write('document.getElementById("free").style.height="0px";\ndocument.getElementById("check").style.height="0px";\ndocument.getElementById("radio").style.height="250px";\n')
-    jsfile.write('document.getElementById("radio").innerHTML="<input type=\\"radio\\" name=\\"question\\" value=\\"answer1\\">Radio<br><input type=\\"radio\\" name=\\"question\\" value=\\"answer2\\">Answer"')
+    #generate radioAnswers
+    jsfile.write('radioAnswerList="";\nfor (i = 0; i < answers[row].length; i++) {\n radioAnswerList+="<input type=\\"radio\\" name=\\"question\\""+row.toString()+" value=\\"answer\\""+i.toString()+">"+answers[row][i]+"<br>";}\n')
+    jsfile.write('document.getElementById("radio").innerHTML=radioAnswerList;')
     #here make sure radio answers are displayed like radio
     jsfile.write('}\nif(answerTypes[row]=="Check"){\n')
     jsfile.write('document.getElementById("free").style.visibility="hidden";\ndocument.getElementById("check").style.visibility="visible";\ndocument.getElementById("radio").style.visibility="hidden";\n')
     jsfile.write('document.getElementById("free").style.height="0px";\ndocument.getElementById("check").style.height="250px";\ndocument.getElementById("radio").style.height="0px";\n')
-    jsfile.write('document.getElementById("check").innerHTML="<input type=\\"checkbox\\" name=\\"question\\" value=\\"answer1\\">Checkbox<br><input type=\\"checkbox\\" name=\\"question\\" value=\\"answer2\\">Answer"')
+    #jsfile.write('document.getElementById("check").innerHTML="<input type=\\"checkbox\\" name=\\"question\\" value=\\"answer1\\">Checkbox<br><input type=\\"checkbox\\" name=\\"question\\" value=\\"answer2\\">Answer"')
     #here make sure ckeckboxes are displayed as checkboxes
+    #generate checkAnswers
+    jsfile.write('checkAnswerList="";\nfor (i = 0; i < answers[row].length; i++) {\n checkAnswerList+="<input type=\\"checkbox\\" name=\\"question\\""+row.toString()+" value=\\"answer\\""+i.toString()+">"+answers[row][i]+"<br>";}\n')
+    jsfile.write('document.getElementById("check").innerHTML=checkAnswerList;')
     jsfile.write('}\nif(answerTypes[row]=="Free"){\n')
     jsfile.write('document.getElementById("free").style.visibility="visible";\ndocument.getElementById("check").style.visibility="hidden";\ndocument.getElementById("radio").style.visibility="hidden";\n')
     jsfile.write('document.getElementById("free").style.height="250px";\ndocument.getElementById("check").style.height="0px";\ndocument.getElementById("radio").style.height="0px";\n')
