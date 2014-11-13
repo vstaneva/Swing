@@ -74,29 +74,6 @@ def HTMLfiller (item,stuffing, fpath): #Slightly out-of-date
     htmlfile.write( "<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n")
     htmlfile.write( "</body>\n</html>" )
 
-def JSgenForPsiTurk(stuffing, path):
-    """Provides similar functionality to JSgen(). However, it works with
-       NYU's PsiTurk software.
-    """
-    jsfile = open(path, 'w')
-    jsfile.write('var Experiment = function() {\n\n')
-    jsfile.write('\tvar trials = [\n')
-    # Load the array of trials
-    for trial in stuffing:
-        jsfile.write('\t\t["%s", "%s", "%s", "%s", %s],\n'%(trial[0], trial[2], trial[3], trial[4], parseAns(trial[5])))
-    jsfile.write('\t];')
-    
-    #what do we do at every question
-    
-    #how to handle responses
-    
-    #what to do at last question
-    
-    #other functionality
-    
-    jsfile.write('};')
-    
-
 def JSgen (stuffing, path):
     """This function works together with HTMLwJSgen().
        It generates a JavaScript file which has all the data of the experiment:
