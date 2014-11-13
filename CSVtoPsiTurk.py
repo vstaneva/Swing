@@ -57,8 +57,8 @@ def ChooseRandomTasks (tasks):
     
 ######FILL IN THE GAPS######
 def JSgenForPsiTurk(stuffing, path):
-    """Provides similar functionality to JSgen(). However, it works with
-       NYU's PsiTurk software.
+    """Provides similar functionality to JSgen() from simple-csv-html.py.
+       However, this works with NYU's PsiTurk software.
     """
     jsfile = open(path, 'w')
     jsfile.write('var Experiment = function() {\n\n')
@@ -72,15 +72,37 @@ def JSgenForPsiTurk(stuffing, path):
     jsfile.write('\tvar next = function() {\n')
     jsfile.write('\t\tif(trials.length===0) {\n\t\t\tfinish();\n\t\t}\n') #check if this is the last trial
     jsfile.write('\t\telse {\n') #what are we doing for this question
-    jsfile.write('\t\t\ttrial=trials.shift();\n\t\t\tdisplay_question(trial[1],trial[2], trial[3], trial[4]);\n\t\t\taskedTime= new Date().getTime();\n')
-    jsfile.write('\t\t\tlistening=true;\n\t\t}\n')
+    jsfile.write('\t\t\ttrial=trials.shift();\n\t\t\tdisplay_question(trial[1], trial[2], trial[3], trial[4]);\n\t\t\taskedTime= new Date().getTime();\n')
+    jsfile.write('\t\t\tlistening=true;\n\t\t}\n\t};\n\n')
     
     #how to handle responses
-    
+    jsfile.write('\tvar response_handler = function(e) {\n')
+    jsfile.write('\t\tif (!listening) return;\n')
+    #how to get the response from the user?!
+    jsfile.write('\t};\n\n')
+
     #what to do at last question
+    jsfile.write('\tvar finish = function() {\n\t\tcurrentview = new Questionnaire();\n\t};\n\n')
+    
+    #display question
+    jsfile.write('\tvar display_question = function(text, question, answertype, answers) {\n')
+    jsfile.write('\t\tif(answertype === "Free")\n')
+    jsfile.write('\t\t\td3.select("#trial")\n\t\t\t\t.append("div")\n\t\t\t\t.attr("id", "free")\n\t\t\t\t.text(text);\n')
+    #var show_word = function(text, color) {
+    #		d3.select("#stim")
+    #			.append("div")
+    #			.attr("id","word")
+    #			.style("color",color)
+    #      		.style("text-align","center")
+    #			.style("font-size","150px")
+    #			.style("font-weight","400")
+    #			.style("margin","20px")
+    #			.text(text);
+    jsfile.write('\t};\n\n')
     
     #other functionality
-    
+    jsfile.write('\tpsiTurk.showPage("stage.html");\n')
+    jsfile.write('\tnext();\n')
     jsfile.write('};')
     
 ######THIS RUNS EVERYTHING######
