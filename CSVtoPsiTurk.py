@@ -66,9 +66,14 @@ def JSgenForPsiTurk(stuffing, path):
     # Load the array of trials
     for trial in stuffing:
         jsfile.write('\t\t["%s", "%s", "%s", "%s", %s],\n'%(trial[0], trial[2], trial[3], trial[4], parseAns(trial[5])))
-    jsfile.write('\t];')
+    jsfile.write('\t];\n\ttrials = _.shuffle(trials);\n\n\tvar askedTime, listening = false;\n')
     
     #what do we do at every question
+    jsfile.write('\tvar next = function() {\n')
+    jsfile.write('\t\tif(trials.length===0) {\n\t\t\tfinish();\n\t\t}\n') #check if this is the last trial
+    jsfile.write('\t\telse {\n') #what are we doing for this question
+    jsfile.write('\t\t\ttrial=trials.shift();\n\t\t\tdisplay_question(trial[1],trial[2], trial[3], trial[4]);\n\t\t\taskedTime= new Date().getTime();\n')
+    jsfile.write('\t\t\tlistening=true;\n\t\t}\n')
     
     #how to handle responses
     
