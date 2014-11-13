@@ -57,7 +57,7 @@ def ChooseRandomTasks (tasks):
     return HTMLstuffing
     
 ######FILL IN THE GAPS######
-def HTMLfiller (item,stuffing, fpath):
+def HTMLfiller (item,stuffing, fpath): #Slightly out-of-date
     """This function makes the HTML code for a task with ITEM=item from the stuffing
        and pastes this code into an HTML page, which goes to a file path
        specified in fpath.
@@ -65,7 +65,7 @@ def HTMLfiller (item,stuffing, fpath):
        so that it's easier for people to use the code.
     """
     #for task in stuffing:
-    path = fpath + str(item) + ".html"
+    path = fpath + "templates/" +str(item) + ".html"
     htmlfile = open(path, 'w')
     htmlfile.write( "<html>\n<head>\n</head>\n<body>\n")
     htmlfile.write( "<p> Experiment </p>\n")
@@ -73,6 +73,29 @@ def HTMLfiller (item,stuffing, fpath):
     htmlfile.write( "<p>%s</p>\n<p>%s</p>\n<p>%s</p>\n" % (stuffing[item][0], stuffing[item][2], stuffing[item][3]))
     htmlfile.write( "<ul>\n<li> Answer1 </li>\n<li> Answer 2 </li>\n<li> Answer 3 </li>\n</ul>\n")
     htmlfile.write( "</body>\n</html>" )
+
+def JSgenForPsiTurk(stuffing, path):
+    """Provides similar functionality to JSgen(). However, it works with
+       NYU's PsiTurk software.
+    """
+    jsfile = open(path, 'w')
+    jsfile.write('var Experiment = function() {\n\n')
+    jsfile.write('\tvar trials = [\n')
+    # Load the array of trials
+    for trial in stuffing:
+        jsfile.write('\t\t["%s", "%s", "%s", "%s", %s],\n'%(trial[0], trial[2], trial[3], trial[4], parseAns(trial[5])))
+    jsfile.write('\t];')
+    
+    #what do we do at every question
+    
+    #how to handle responses
+    
+    #what to do at last question
+    
+    #other functionality
+    
+    jsfile.write('};')
+    
 
 def JSgen (stuffing, path):
     """This function works together with HTMLwJSgen().
@@ -123,8 +146,8 @@ def HTMLwJSgen (stuffing, fpath):
        file found as specified by fpath, and passes the stuffing and the file
        path to JSgen().
     """
-    path = fpath + ".html"
-    jspath = fpath + ".js"
+    path = fpath + "templates/exp.html"
+    jspath = fpath + "static/js/exp.js"
     JSgen(stuffing, jspath)
     htmlfile = open(path, 'w')
     htmlfile.write('<html>\n<head></head>\n<body>\n')
@@ -144,10 +167,11 @@ def HTMLwJSgen (stuffing, fpath):
 
 ######THIS RUNS EVERYTHING######
 tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/small_example.csv")
-HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/gen/gen"
+HTMLfilepath = "/Users/val/Documents/UROP-Fall2015/urop/psiturk-urop/"
 #for task in tasklist:
 #    print task
 HTMLstuffing = ChooseRandomTasks(tasklist)
+JSgenForPsiTurk(HTMLstuffing, HTMLfilepath+"psiturkexp.js")
 print HTMLstuffing[0]
 #HTMLfiller(0, HTMLstuffing, HTMLfilepath)
 #print parseAns("Yes#No#Maybe#I don't know#Answer")

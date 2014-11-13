@@ -1,0 +1,630 @@
+2014-11-07 12:25:50,571 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:50,572 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-07 12:25:50 -0500] [99093] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3404, in create_all
+    tables=tables)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1616, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1245, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1159, in _handle_dbapi_exception
+    exc_info
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table turkdemo already exists u'\nCREATE TABLE turkdemo (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3404, in create_all
+    tables=tables)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1616, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1245, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1159, in _handle_dbapi_exception
+    exc_info
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table turkdemo already exists u'\nCREATE TABLE turkdemo (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+2014-11-07 12:25:50,701 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:50,851 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:50,962 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:51,025 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:51,033 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:51,035 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,094 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,278 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,283 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,496 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,591 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,634 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,738 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,746 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:25:59,758 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:31:02,959 hit_assign_worker_id_not_set_in_mturk (1001) {}
+2014-11-07 12:31:30,802 hit_assign_worker_id_not_set_in_mturk (1001) {}
+2014-11-07 12:32:12,040 hit_assign_worker_id_not_set_in_mturk (1001) {}
+2014-11-07 12:32:34,958 hit_assign_worker_id_not_set_in_mturk (1001) {}
+2014-11-07 12:53:44,700 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:44,702 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:44,744 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:44,744 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:44,935 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,031 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,254 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,297 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,331 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,333 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,365 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,375 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,384 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,407 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,415 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,421 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 12:53:45,429 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,204 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,469 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,640 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,649 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,841 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,896 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,897 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,908 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:32:10,918 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:712)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:713)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:714)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:715)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:716)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:717)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:718)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:719)
+[2014-11-07 13:51:28 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:720)
+2014-11-07 13:51:29,720 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,721 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,731 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,739 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,744 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,782 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,867 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,900 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 13:51:29,914 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1248)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1249)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1250)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1251)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1252)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1244)
+[2014-11-07 14:55:56 -0500] [708] [CRITICAL] WORKER TIMEOUT (pid:1246)
+2014-11-07 14:55:58,886 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:58,887 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:58,940 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:58,944 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:58,953 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:58,980 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 14:55:59,017 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:40,701 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:40,754 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:40,859 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,038 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,073 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,074 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,085 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,104 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 15:07:41,113 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1952)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1953)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1954)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1955)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1956)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1948)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1949)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1950)
+[2014-11-07 16:10:50 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:1951)
+2014-11-07 16:10:51,410 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,410 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,501 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,518 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,536 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,548 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,558 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,558 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 16:10:51,581 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2406)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2407)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2408)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2409)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2410)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2411)
+[2014-11-07 19:27:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2412)
+2014-11-07 19:27:21,889 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:21,894 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:21,902 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:21,942 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:21,964 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:21,987 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-07 19:27:22,023 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 00:37:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2413)
+2014-11-08 00:37:20,104 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2629)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2630)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2631)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2632)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2633)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2634)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2635)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2414)
+[2014-11-08 03:42:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2646)
+2014-11-08 03:42:48,906 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:48,943 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:48,985 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,095 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,119 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,150 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,153 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,170 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 03:42:49,178 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2730)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2731)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2733)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2734)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2735)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2736)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2737)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2738)
+[2014-11-08 10:47:38 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2739)
+2014-11-08 10:47:40,568 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,654 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,659 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,672 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,716 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,759 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,795 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,798 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:47:40,800 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2752)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2744)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2745)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2746)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2747)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2748)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2749)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2750)
+[2014-11-08 10:48:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2751)
+2014-11-08 10:48:45,171 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,185 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,195 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,195 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,211 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,212 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,219 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,235 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 10:48:45,258 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2768)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2769)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2770)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2771)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2773)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2774)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2775)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2776)
+[2014-11-08 13:54:15 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2777)
+2014-11-08 13:54:15,801 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,028 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,313 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,383 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,399 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,440 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,441 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,447 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 13:54:16,454 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2994)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2996)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2997)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2998)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:2999)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3000)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3001)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3002)
+[2014-11-08 14:29:20 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3003)
+2014-11-08 14:29:21,875 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:21,875 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:21,962 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,076 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,090 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,141 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,156 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,171 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 14:29:22,173 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3043)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3044)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3045)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3046)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3047)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3048)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3049)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3050)
+[2014-11-08 16:41:42 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:3051)
+2014-11-08 16:41:44,078 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,088 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,100 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,102 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,104 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,105 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,109 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,116 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 16:41:44,128 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4017)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4018)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4019)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4020)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4021)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4022)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4023)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4024)
+[2014-11-08 19:31:48 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4025)
+2014-11-08 19:31:49,188 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,433 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,560 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,662 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,705 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,713 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,732 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,747 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 19:31:49,757 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4071)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4072)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4074)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4075)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4076)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4077)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4078)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4079)
+[2014-11-08 22:32:18 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4080)
+2014-11-08 22:32:18,841 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:18,842 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:18,874 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:18,976 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:19,145 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:19,172 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:19,182 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:19,190 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-08 22:32:19,200 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4084)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4085)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4086)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4087)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4088)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4089)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4090)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4091)
+[2014-11-09 16:34:43 -0500] [1944] [CRITICAL] WORKER TIMEOUT (pid:4092)
+2014-11-11 14:20:04,570 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,599 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,769 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,878 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,922 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,963 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,982 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,982 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 14:20:04,994 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,516 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,731 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,791 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,904 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,932 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,947 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,962 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,978 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 15:23:20,989 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11954)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11955)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11956)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11957)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11958)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11959)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11960)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11961)
+[2014-11-11 16:37:09 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:11962)
+2014-11-11 16:37:10,986 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,044 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,056 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,071 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,116 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,150 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,152 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,186 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:37:11,199 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12611)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12612)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12613)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12614)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12615)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12616)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12617)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12618)
+[2014-11-11 16:59:25 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12619)
+2014-11-11 16:59:26,759 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,772 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,862 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,882 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,894 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,913 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,947 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,959 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 16:59:26,980 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12785)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12786)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12787)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12788)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12789)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12790)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12792)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12793)
+[2014-11-11 17:14:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:12794)
+2014-11-11 17:14:04,040 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,045 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,135 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,182 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,233 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,243 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,256 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,267 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 17:14:04,278 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15287)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15288)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15289)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15290)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15291)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15292)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15293)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15294)
+[2014-11-11 18:15:57 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15295)
+2014-11-11 18:15:59,156 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,156 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,157 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,218 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,234 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,274 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,289 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,290 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 18:15:59,301 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15585)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15586)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15587)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15588)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15589)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15590)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15591)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15592)
+[2014-11-11 19:46:55 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:15593)
+2014-11-11 19:46:56,878 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:56,984 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:56,999 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,054 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,116 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,117 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,165 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,192 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 19:46:57,226 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16192)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16193)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16194)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16195)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16196)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16197)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16198)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16199)
+[2014-11-11 20:26:03 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16201)
+2014-11-11 20:26:04,389 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,399 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,402 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,436 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,480 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,480 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,516 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,597 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 20:26:04,597 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16256)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16257)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16258)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16259)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16260)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16252)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16253)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16254)
+[2014-11-11 22:00:42 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16255)
+2014-11-11 22:00:43,735 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,751 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,794 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,800 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,942 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,961 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:43,970 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:44,015 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 22:00:44,040 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16297)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16298)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16299)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16300)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16301)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16302)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16303)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16304)
+[2014-11-11 23:31:01 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16305)
+2014-11-11 23:31:02,277 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,309 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,393 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,397 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,642 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,681 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,740 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,755 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-11 23:31:02,786 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16358)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16359)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16360)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16361)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16362)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16363)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16364)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16365)
+[2014-11-12 03:06:47 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16366)
+2014-11-12 10:17:21,066 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,203 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,206 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,211 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,221 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,223 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,228 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,241 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:17:21,251 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16745)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16746)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16747)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16748)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16749)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16753)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16756)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16757)
+[2014-11-12 10:59:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:16758)
+2014-11-12 10:59:53,968 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:53,970 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,003 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,014 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,016 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,030 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,062 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,084 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 10:59:54,085 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17164)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17165)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17166)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17167)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17168)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17169)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17170)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17171)
+[2014-11-12 11:23:13 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17172)
+2014-11-12 11:23:14,385 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,556 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,562 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,565 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,565 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,589 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,641 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,646 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:23:14,651 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17388)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17389)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17390)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17391)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17392)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17393)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17394)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17395)
+[2014-11-12 11:52:15 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17396)
+2014-11-12 11:52:16,491 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,532 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,545 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,548 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,614 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,634 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,665 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,671 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 11:52:16,692 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17480)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17481)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17482)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17483)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17484)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17485)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17486)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17487)
+[2014-11-12 16:33:02 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:17488)
+2014-11-12 16:33:03,409 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,411 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,412 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,426 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,489 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,507 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,519 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,545 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-12 16:33:03,549 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 20:36:52 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18466)
+2014-11-12 20:36:56,221 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18467)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18468)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18469)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18470)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18471)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18472)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18473)
+[2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18475)
