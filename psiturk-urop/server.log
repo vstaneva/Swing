@@ -628,3 +628,12 @@ OperationalError: (OperationalError) table turkdemo already exists u'\nCREATE TA
 [2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18472)
 [2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18473)
 [2014-11-12 21:00:43 -0500] [11950] [CRITICAL] WORKER TIMEOUT (pid:18475)
+2014-11-16 16:20:24,698 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,710 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,729 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,777 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,801 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,806 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,856 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,875 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 16:20:24,884 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js

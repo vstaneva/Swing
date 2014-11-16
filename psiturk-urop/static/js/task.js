@@ -45,110 +45,74 @@ var instructionPages = [ // add as a list as many pages as you like
 * STROOP TEST       *
 ********************/
 //put a KEYWORD here so python can insert the experiment data.
-var StroopExperiment = function() {
+var Experiment = function() {
 
-	var wordon, // time word is presented
-	    listening = false;
+	var trials = [
+		["1", "The editor saw the reporter.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
+		["2", "The accountant contacted the secretary.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
+		["3", "The fox said, hatee-hatee-hatee-ho.", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
+	];
+	trials = _.shuffle(trials);
 
-	// Stimuli for a basic Stroop experiment
-	var stims = [
-			["SHIP", "red", "unrelated"],
-			["MONKEY", "green", "unrelated"],
-			["ZAMBONI", "blue", "unrelated"],
-			["RED", "red", "congruent"],
-			["GREEN", "green", "congruent"],
-			["BLUE", "blue", "congruent"],
-			["GREEN", "red", "incongruent"],
-			["BLUE", "green", "incongruent"],
-			["RED", "blue", "incongruent"]
-		];
-
-	stims = _.shuffle(stims);
-
-	var next = function() { // here is where code for one specific question should go
-		if (stims.length===0) {
+	var askedTime, listening = false;
+	var next = function() {
+		if(trials.length===0) {
 			finish();
 		}
 		else {
-			stim = stims.shift();
-			show_word( stim[0], stim[1] );
-			wordon = new Date().getTime();
-			listening = true;
-			d3.select("#query").html('<p id="prompt">Type "R" for Red, "B" for blue, "G" for green.</p>');
+			trial=trials.shift();
+			display_question(trial[1], trial[2], trial[3], trial[4]);
+			askedTime= new Date().getTime();
+			listening=true;
 		}
 	};
-	
-	var response_handler = function(e) { //this should be active when the user presses "Next"
+
+	var response_handler = function(e) {
 		if (!listening) return;
+	};
 
-		var keyCode = e.keyCode,
-			response;
+	var finish = function() {
+		currentview = new Questionnaire();
+	};
 
-		switch (keyCode) {
-			case 82:
-				// "R"
-				response="red";
-				break;
-			case 71:
-				// "G"
-				response="green";
-				break;
-			case 66:
-				// "B"
-				response="blue";
-				break;
-			default:
-				response = "";
-				break;
+	var display_question = function(text, question, answertype, answers) {
+		d3.select("#text")
+			.data(text)
+			.enter()
+			.append("p")
+			.text(function(d) { return d; });
+		d3.select("#question")
+			.data(question)
+			.enter()
+			.append("p")
+			.text(function(d) { return d; });
+		if(answertype === "Free") {
+			d3.select("#free")
+				.data(answers)
+				.enter()
+				.append("p")
+				.style("color","red")
+				.text(function(d) { return d; });
 		}
-		if (response.length>0) {
-			listening = false;
-			var hit = response == stim[1];
-			var rt = new Date().getTime() - wordon;
-
-			psiTurk.recordTrialData({'phase':"TEST", //this is really important!
-                                     'word':stim[0],
-                                     'color':stim[1],
-                                     'relation':stim[2],
-                                     'response':response,
-                                     'hit':hit,
-                                     'rt':rt}
-                                   );
-			remove_word();
-			next();
+		else if(answertype === "Radio") {
+			d3.select("#radio")
+				.data(answers)
+				.enter()
+				.append("p")
+				.style("color","green")
+				.text(function(d) { return d; });
+		}
+		else if(answertype === "Check") {
+			d3.select("#check")
+				.data(answers)
+				.enter()
+				.append("p")
+				.style("color","blue")
+				.text(function(d) { return d; });
 		}
 	};
 
-	var finish = function() { //this is when
-	    $("body").unbind("keydown", response_handler); // Unbind keys
-	    currentview = new Questionnaire();
-	};
-	
-	var show_word = function(text, color) {
-		d3.select("#stim")
-			.append("div")
-			.attr("id","word")
-			.style("color",color)
-			.style("text-align","center")
-			.style("font-size","150px")
-			.style("font-weight","400")
-			.style("margin","20px")
-			.text(text);
-	};
-
-	var remove_word = function() {
-		d3.select("#word").remove();
-	};
-
-	
-	// Load the stage.html snippet into the body of the page
-	psiTurk.showPage('stage.html');
-
-	// Register the response handler that is defined above to handle any
-	// key down events.
-	$("body").focus().keydown(response_handler); 
-
-	// Start the test
+	psiTurk.showPage("stage.html");
 	next();
 };
 
@@ -219,6 +183,6 @@ var currentview;
 $(window).load( function(){
     psiTurk.doInstructions(
     	instructionPages, // a list of pages you want to display in sequence
-    	//function() { currentview = new StroopExperiment(); } // what you want to do when you are done with instructions
+    	function() { currentview = new Experiment(); } // what you want to do when you are done with instructions
     );
 });
