@@ -1,7 +1,7 @@
 var Experiment = function() {
 
 	var trials = [
-		["1", "The editor saw the senator.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
+		["1", "The editor saw the reporter.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["2", "The accountant contacted the secretary.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "The fox said, hatee-hatee-hatee-ho.", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
@@ -29,11 +29,38 @@ var Experiment = function() {
 	};
 
 	var display_question = function(text, question, answertype, answers) {
-		if(answertype === "Free")
-			d3.select("#trial")
-				.append("div")
-				.attr("id", "free")
-				.text(text);
+		d3.select("#text")
+			.enter()
+			.append("p")
+			.text(text);
+		d3.select("#question")
+			.enter()
+			.append("p")
+			.text(question);
+		if(answertype === "Free") {
+			d3.select("#free")
+				.data(answers)
+				.enter()
+				.append("p").
+				.style("color","red")
+				.text(function(d) { return d; });
+		}
+		else if(answertype === "Radio") {
+			d3.select("#radio")
+				.data(answers)
+				.enter()
+				.append("p")
+				.style("color","green")
+				.text(function(d) { return d; });
+		}
+		else if(answertype === "Check") {
+			d3.select("#check")
+				.data(answers)
+				.enter()
+				.append("p")
+				.style("color","blue")
+				.text(function(d) { return d; });
+		}
 	};
 
 	psiTurk.showPage("stage.html");

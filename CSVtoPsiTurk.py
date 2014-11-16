@@ -86,18 +86,18 @@ def JSgenForPsiTurk(stuffing, path):
     
     #display question
     jsfile.write('\tvar display_question = function(text, question, answertype, answers) {\n')
-    jsfile.write('\t\tif(answertype === "Free")\n')
-    jsfile.write('\t\t\td3.select("#trial")\n\t\t\t\t.append("div")\n\t\t\t\t.attr("id", "free")\n\t\t\t\t.text(text);\n')
-    #var show_word = function(text, color) {
-    #		d3.select("#stim")
-    #			.append("div")
-    #			.attr("id","word")
-    #			.style("color",color)
-    #      		.style("text-align","center")
-    #			.style("font-size","150px")
-    #			.style("font-weight","400")
-    #			.style("margin","20px")
-    #			.text(text);
+    jsfile.write('\t\td3.select("#text")\n\t\t\t.enter()\n\t\t\t.append("p")\n\t\t\t.text(text);\n')
+    jsfile.write('\t\td3.select("#question")\n\t\t\t.enter()\n\t\t\t.append("p")\n\t\t\t.text(question);\n')
+    jsfile.write('\t\tif(answertype === "Free") {\n')
+    jsfile.write('\t\t\td3.select("#free")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p").\n\t\t\t\t.style("color","red")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t}\n')
+    jsfile.write('\t\telse if(answertype === "Radio") {\n')
+    jsfile.write('\t\t\td3.select("#radio")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","green")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t}\n')
+    jsfile.write('\t\telse if(answertype === "Check") {\n')
+    jsfile.write('\t\t\td3.select("#check")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","blue")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t}\n')
+    
     jsfile.write('\t};\n\n')
     
     #other functionality
