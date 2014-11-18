@@ -48,14 +48,15 @@ var instructionPages = [ // add as a list as many pages as you like
 var Experiment = function() {
 
 	var trials = [
-		["1", "The editor saw the reporter.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
-		["2", "The accountant contacted the secretary.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
+		["1", "The editor hired the senator.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
+		["2", "The accountant wrote a report for the executive.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "The fox said, hatee-hatee-hatee-ho.", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
 	trials = _.shuffle(trials);
 
 	var askedTime, listening = false;
-	var next = function() {
+
+	var next = function() {//this one is ready
 		if(trials.length===0) {
 			finish();
 		}
@@ -67,43 +68,45 @@ var Experiment = function() {
 		}
 	};
 
-	var response_handler = function(e) {
+	var response_handler = function(e) { //this one I will code soon
 		if (!listening) return;
+		next();
 	};
 
-	var finish = function() {
+	var finish = function() {//this is ready
 		currentview = new Questionnaire();
 	};
 
 	var display_question = function(text, question, answertype, answers) {
 		d3.select("#text")
-			.data(text)
-			.enter()
+			.data(jQuery.makeArray(text))
 			.append("p")
 			.text(function(d) { return d; });
 		d3.select("#question")
-			.data(question)
-			.enter()
+			.data(jQuery.makeArray(question))
 			.append("p")
 			.text(function(d) { return d; });
-		if(answertype === "Free") {
+		if(answertype == "Free") {
 			d3.select("#free")
+				.selectAll("p")
 				.data(answers)
 				.enter()
 				.append("p")
 				.style("color","red")
 				.text(function(d) { return d; });
 		}
-		else if(answertype === "Radio") {
+		else if(answertype == "Radio") {
 			d3.select("#radio")
+				.selectAll("p")
 				.data(answers)
 				.enter()
 				.append("p")
 				.style("color","green")
 				.text(function(d) { return d; });
 		}
-		else if(answertype === "Check") {
+		else if(answertype == "Check") {
 			d3.select("#check")
+				.selectAll("p")
 				.data(answers)
 				.enter()
 				.append("p")

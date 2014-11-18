@@ -637,3 +637,129 @@ OperationalError: (OperationalError) table turkdemo already exists u'\nCREATE TA
 2014-11-16 16:20:24,856 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2014-11-16 16:20:24,875 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2014-11-16 16:20:24,884 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36835)
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36836)
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36838)
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36840)
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36842)
+[2014-11-16 18:30:11 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36843)
+2014-11-16 18:30:13,417 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 18:30:13,456 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 18:30:13,463 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 18:30:13,464 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 18:30:13,476 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 18:30:13,498 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-16 20:33:01 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36837)
+[2014-11-16 20:33:01 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36839)
+[2014-11-16 20:33:01 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:36841)
+2014-11-16 20:33:01,778 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 20:33:01,778 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-16 20:33:01,782 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37664)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37665)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37666)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37667)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37668)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:38610)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:38611)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:38612)
+[2014-11-16 20:37:20 -0500] [36831] [CRITICAL] WORKER TIMEOUT (pid:37663)
+2014-11-18 14:40:55,024 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,054 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,214 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,267 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,298 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,335 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,350 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,367 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:40:55,391 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46691)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46692)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46693)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46694)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46695)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46696)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46697)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46698)
+[2014-11-18 14:59:48 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46699)
+2014-11-18 14:59:49,570 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,600 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,610 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,637 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,647 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,664 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,674 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,683 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 14:59:49,687 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:32:39,291 Exception on /apple-touch-icon-precomposed.png [GET]
+Traceback (most recent call last):
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment.py", line 665, in regularpage
+    return render_template(pagename)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: apple-touch-icon-precomposed.png
+2014-11-18 15:32:39,312 Exception on /apple-touch-icon.png [GET]
+Traceback (most recent call last):
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/experiment.py", line 665, in regularpage
+    return render_template(pagename)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: apple-touch-icon.png
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46921)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46922)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46923)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46924)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46925)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46926)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46927)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46928)
+[2014-11-18 15:39:06 -0500] [46687] [CRITICAL] WORKER TIMEOUT (pid:46920)
+2014-11-18 15:39:08,038 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,038 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,082 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,094 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,115 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,169 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,195 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,219 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-18 15:39:08,219 /Users/val/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js

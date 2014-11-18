@@ -66,36 +66,36 @@ def JSgenForPsiTurk(stuffing, path):
     # Load the array of trials
     for trial in stuffing:
         jsfile.write('\t\t["%s", "%s", "%s", "%s", %s],\n'%(trial[0], trial[2], trial[3], trial[4], parseAns(trial[5])))
-    jsfile.write('\t];\n\ttrials = _.shuffle(trials);\n\n\tvar askedTime, listening = false;\n')
+    jsfile.write('\t];\n\ttrials = _.shuffle(trials);\n\n\tvar askedTime, listening = false;\n\n')
     
     #what do we do at every question
-    jsfile.write('\tvar next = function() {\n')
+    jsfile.write('\tvar next = function() {//this one is ready\n')
     jsfile.write('\t\tif(trials.length===0) {\n\t\t\tfinish();\n\t\t}\n') #check if this is the last trial
     jsfile.write('\t\telse {\n') #what are we doing for this question
     jsfile.write('\t\t\ttrial=trials.shift();\n\t\t\tdisplay_question(trial[1], trial[2], trial[3], trial[4]);\n\t\t\taskedTime= new Date().getTime();\n')
     jsfile.write('\t\t\tlistening=true;\n\t\t}\n\t};\n\n')
     
     #how to handle responses
-    jsfile.write('\tvar response_handler = function(e) {\n')
-    jsfile.write('\t\tif (!listening) return;\n')
+    jsfile.write('\tvar response_handler = function(e) { //this one I will code soon\n')
+    jsfile.write('\t\tif (!listening) return;\n\t\tnext();\n')
     #how to get the response from the user?!
     jsfile.write('\t};\n\n')
 
     #what to do at last question
-    jsfile.write('\tvar finish = function() {\n\t\tcurrentview = new Questionnaire();\n\t};\n\n')
+    jsfile.write('\tvar finish = function() {//this is ready\n\t\tcurrentview = new Questionnaire();\n\t};\n\n')
     
     #display question
     jsfile.write('\tvar display_question = function(text, question, answertype, answers) {\n')
-    jsfile.write('\t\td3.select("#text")\n\t\t\t.enter()\n\t\t\t.append("p")\n\t\t\t.text(text);\n')
-    jsfile.write('\t\td3.select("#question")\n\t\t\t.enter()\n\t\t\t.append("p")\n\t\t\t.text(question);\n')
-    jsfile.write('\t\tif(answertype === "Free") {\n')
-    jsfile.write('\t\t\td3.select("#free")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p").\n\t\t\t\t.style("color","red")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\td3.select("#text")\n\t\t\t.data(jQuery.makeArray(text))\n\t\t\t.append("p")\n\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\td3.select("#question")\n\t\t\t.data(jQuery.makeArray(question))\n\t\t\t.append("p")\n\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\tif(answertype == "Free") {\n')
+    jsfile.write('\t\t\td3.select("#free")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","red")\n\t\t\t\t.text(function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
-    jsfile.write('\t\telse if(answertype === "Radio") {\n')
-    jsfile.write('\t\t\td3.select("#radio")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","green")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\telse if(answertype == "Radio") {\n')
+    jsfile.write('\t\t\td3.select("#radio")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","green")\n\t\t\t\t.text(function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
-    jsfile.write('\t\telse if(answertype === "Check") {\n')
-    jsfile.write('\t\t\td3.select("#check")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","blue")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\telse if(answertype == "Check") {\n')
+    jsfile.write('\t\t\td3.select("#check")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","blue")\n\t\t\t\t.text(function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
     
     jsfile.write('\t};\n\n')
