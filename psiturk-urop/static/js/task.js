@@ -52,7 +52,7 @@ var Experiment = function() {
 		["2", "The accountant wrote a report for the secretary.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "The fox said, hatee-hatee-hatee-ho.", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
-	trials = _.shuffle(trials);
+	//trials = _.shuffle(trials);
 
 	var askedTime, listening = false;
 
@@ -69,8 +69,7 @@ var Experiment = function() {
 	};
 
 	var response_handler = function(e) {
-		if (!listening) return;
-		
+		//if (!listening) return;
 		remove_question();
 		next();
 	};
@@ -126,12 +125,15 @@ var Experiment = function() {
 	};
 	
 	var remove_question = function() {
-		d3.select("#free").remove();
-		d3.select("#radio").remove();
-		d3.select("#check").remove();
+		d3.select("#text").selectAll("*").remove();
+		d3.select("#question").selectAll("*").remove();
+		d3.select("#free").selectAll("*").remove();
+		d3.select("#radio").selectAll("*").remove();
+		d3.select("#check").selectAll("*").remove();
 	};
 
 	psiTurk.showPage("stage.html");
+	$("input").focus().click(response_handler); 
 	next();
 };
 
