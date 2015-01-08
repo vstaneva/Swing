@@ -1,8 +1,8 @@
 var Experiment = function() {
 
 	var trials = [
-		["1", "The editor hired the senator.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
-		["2", "The accountant wrote a report for the executive.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
+		["1", "The editor saw the senator.", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
+		["2", "The accountant wrote a report for the secretary.", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "The fox said, hatee-hatee-hatee-ho.", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
 	trials = _.shuffle(trials);
@@ -41,31 +41,45 @@ var Experiment = function() {
 			.text(function(d) { return d; });
 		if(answertype == "Free") {
 			d3.select("#free")
-				.selectAll("p")
+				.selectAll("input")
 				.data(answers)
 				.enter()
-				.append("p")
-				.style("color","red")
-				.text(function(d) { return d; });
+				.append("input")
+				.attr("type", "text")
+				.attr("value", function(d) { return d; });
 		}
 		else if(answertype == "Radio") {
 			d3.select("#radio")
-				.selectAll("p")
+				.selectAll("input")
 				.data(answers)
 				.enter()
-				.append("p")
-				.style("color","green")
-				.text(function(d) { return d; });
+				.append('label')
+					.attr('for',function(d,i){ return 'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "radio")
+				.attr("name", "radioanswer")
+				.attr("value", function(d) { return d; });
 		}
 		else if(answertype == "Check") {
 			d3.select("#check")
-				.selectAll("p")
+				.selectAll("input")
 				.data(answers)
 				.enter()
-				.append("p")
-				.style("color","blue")
-				.text(function(d) { return d; });
+				.append('label')
+					.attr('for',function(d,i){ return 'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "checkbox")
+				.attr("name", "checkboxanswer")
+				.attr("value", function(d) { return d; });
 		}
+	};
+
+	var remove_word = function() {
+		d3.select("#free").remove();
+		d3.select("#radio").remove();
+		d3.select("#check").remove();
 	};
 
 	psiTurk.showPage("stage.html");

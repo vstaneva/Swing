@@ -76,7 +76,7 @@ def JSgenForPsiTurk(stuffing, path):
     jsfile.write('\t\t\tlistening=true;\n\t\t}\n\t};\n\n')
     
     #how to handle responses
-    jsfile.write('\tvar response_handler = function(e) { //this one I will code soon\n')
+    jsfile.write('\tvar response_handler = function(e) {\n')
     jsfile.write('\t\tif (!listening) return;\n\t\tnext();\n')
     #how to get the response from the user?!
     jsfile.write('\t};\n\n')
@@ -89,18 +89,19 @@ def JSgenForPsiTurk(stuffing, path):
     jsfile.write('\t\td3.select("#text")\n\t\t\t.data(jQuery.makeArray(text))\n\t\t\t.append("p")\n\t\t\t.text(function(d) { return d; });\n')
     jsfile.write('\t\td3.select("#question")\n\t\t\t.data(jQuery.makeArray(question))\n\t\t\t.append("p")\n\t\t\t.text(function(d) { return d; });\n')
     jsfile.write('\t\tif(answertype == "Free") {\n')
-    jsfile.write('\t\t\td3.select("#free")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","red")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t\td3.select("#free")\n\t\t\t\t.selectAll("input")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("input")\n\t\t\t\t.attr("type", "text")\n\t\t\t\t.attr("value", function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
     jsfile.write('\t\telse if(answertype == "Radio") {\n')
-    jsfile.write('\t\t\td3.select("#radio")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","green")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t\td3.select("#radio")\n\t\t\t\t.selectAll("input")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append(\'label\')\n\t\t\t\t\t.attr(\'for\',function(d,i){ return \'a\'+i; })\n\t\t\t\t\t.text(function(d) { return d; })\n\t\t\t\t.append("input")\n\t\t\t\t.attr("type", "radio")\n\t\t\t\t.attr("name", "radioanswer")\n\t\t\t\t.attr("value", function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
     jsfile.write('\t\telse if(answertype == "Check") {\n')
-    jsfile.write('\t\t\td3.select("#check")\n\t\t\t\t.selectAll("p")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append("p")\n\t\t\t\t.style("color","blue")\n\t\t\t\t.text(function(d) { return d; });\n')
+    jsfile.write('\t\t\td3.select("#check")\n\t\t\t\t.selectAll("input")\n\t\t\t\t.data(answers)\n\t\t\t\t.enter()\n\t\t\t\t.append(\'label\')\n\t\t\t\t\t.attr(\'for\',function(d,i){ return \'a\'+i; })\n\t\t\t\t\t.text(function(d) { return d; })\n\t\t\t\t.append("input")\n\t\t\t\t.attr("type", "checkbox")\n\t\t\t\t.attr("name", "checkboxanswer")\n\t\t\t\t.attr("value", function(d) { return d; });\n')
     jsfile.write('\t\t}\n')
     
     jsfile.write('\t};\n\n')
     
     #other functionality
+    jsfile.write('\tvar remove_question = function() {\n\t\td3.select("#free").remove();\n\t\td3.select("#radio").remove();\n\t\td3.select("#check").remove();\n\t};\n\n')
     jsfile.write('\tpsiTurk.showPage("stage.html");\n')
     jsfile.write('\tnext();\n')
     jsfile.write('};')
