@@ -54,22 +54,35 @@ var Experiment = function() {
 	];
 	//trials = _.shuffle(trials);
 
-	var askedTime, listening = false;
+	var askedTime;
 
 	var next = function() {//this one is ready -- or, is it? it gives an error message, idk
 		if(trials.length===0) {
 			finish();
 		}
 		else {
+			if(trials.length===1){
+				d3.select("#nextq").
+					attr("value", "Submit");
+			}
 			trial=trials.shift();
 			display_question(trial[1], trial[2], trial[3], trial[4]);
 			askedTime= new Date().getTime();
-			listening=true;
+			//listening=true;
 		}
 	};
-
+	
 	var response_handler = function(e) {
-		//if (!listening) return;
+		$('input:checkbox:checked, input:radio:checked, input:text').each(function () {
+       		var sThisVal = $(this).val();
+       		alert(sThisVal);
+       		psiTurk.recordTrialData({
+    			'phase':'test',
+   				'text': $('#text').value,
+       			'question':$('#question').value,
+       			'checked': $(this).val()
+       		});
+  		});
 		remove_question();
 		next();
 	};
@@ -143,7 +156,7 @@ var Experiment = function() {
 
 var Questionnaire = function() {
 
-	var error_message = "<h1>Oops! Sowwy!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+	var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
 	record_responses = function() {
 
