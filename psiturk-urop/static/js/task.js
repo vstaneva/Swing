@@ -73,14 +73,16 @@ var Experiment = function() {
 	};
 	
 	var response_handler = function(e) {
-		$('input:checkbox:checked, input:radio:checked, input:text').each(function () {
+		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
-       		alert(sThisVal);
        		psiTurk.recordTrialData({
-    			'phase':'test',
-   				'text': $('#text').value,
-       			'question':$('#question').value,
-       			'checked': $(this).val()
+    			"phase": "test",
+    			"item": trial[0],
+   				"text": trial[1],
+       			"question": trial[2],
+       			"type": trial[3],
+       			"checked": sThisVal,
+       			"asked": askedTime
        		});
   		});
 		remove_question();
