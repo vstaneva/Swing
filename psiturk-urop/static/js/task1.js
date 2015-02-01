@@ -46,8 +46,7 @@ var instructionPages = [ // add as a list as many pages as you like
 ********************/
 //put a KEYWORD here so python can insert the experiment data.
 var Experiment = function() {
-
-	var experimentTrials = [
+	var trials = [
 		["1", "unconstraining_NP2", "1", "1", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["1", "constraining_NP2", "1", "1", "The editor hired the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["1", "constraining_RCNP", "1", "1", "The editor hired the senator.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
@@ -68,61 +67,110 @@ var Experiment = function() {
 		["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
 		["3", "unconstraining_NP2", "2", "2", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
 	];
-	var practiceTrials = [
+	var practice_trials = [
 		["1", "", "", "", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["2", "", "", "", "The accountant wrote a report for the secretary.", "", "", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "", "", "", "The fox said, hatee-hatee-hatee-ho.", "", "", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
 	//trials = _.shuffle(trials);
 
-	var trials = [];
-	
-	var shuffle_trials = function(){
-		var currItem = 1, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
-		for (i=0; i<experimentTrials.length; i++){
-			trial = experimentTrials[i];
-			if(parseInt(trial[0]) !== currItem){ //look! it's a new item
-				//choosing which (item, condition) pair to show
-				choseni = (~~(Math.random() * (currConditions.length)));
-				itemConditionPairs[itemConditionPairs.length] = [currItem, currConditions[choseni]];
-				//resetting
-				currConditions=[]; // please be empty
-				currItem ++;
+	var askedTime;
+
+	var next = function() {//this one is ready -- or, is it? it gives an error message, idk
+		if(trials.length===0) {
+			finish();
+		}
+		else {
+			if(trials.length===1){
+				d3.select("#nextq").
+					attr("value", "Submit");
 			}
-			if(currConditions.length===0) {//currConditions is empty
-				currConditions[currConditions.length] = [trial[1], i, 1, trial[0]];
-				}
-			else {//currConditions is not empty at all
-				if(currCond[0] !== trial[1]){//this is the first question of the condition
-					currConditions[currConditions.length] = [trial[1], i, 1, trial[0]];
-					}
-				else{ //this is a subsequent question of the same condition
-					currConditions[currConditions.length-1][2] = currConditions[currConditions.length-1][2]+1;
-					}
-				}
-			
-			if(currConditions.length) currCond = currConditions[currConditions.length-1];
+			trial=trials.shift();
+			display_question(trial[1], trial[2], trial[3], trial[4]);
+			askedTime= new Date().getTime();
+			//listening=true;
 		}
-		choseni = (~~(Math.random() * (currConditions.length)));
-		itemConditionPairs[itemConditionPairs.length] = [currItem, currConditions[choseni]];
-		//shuffle all the itemConditionPairs
-		itemConditionPairs = _.shuffle(itemConditionPairs);
-		//fill up the trials[] with these itemConditionPairs[]
-		console.log(itemConditionPairs);
-		for(i=0; i<itemConditionPairs.length; i++){
-			section = itemConditionPairs[i][1];
-			starti = section[1];
-			lengthi = section[2];
-			chosenTrials = experimentTrials.slice(starti, lengthi+starti);
-			console.log(chosenTrials);
-			trials = trials.concat(chosenTrials);
-		}
-	console.log(trials);
-	}
-	psiTurk.showPage('stage.html');
-	shuffle_trials();
-	//$("input").focus().click(shuffle_trials); 
+	};
 	
+	var response_handler = function(e) {
+		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
+       		var sThisVal = $(this).val();
+       		alert (sThisVal);
+       		psiTurk.recordTrialData({
+    			"phase": "test",
+    			"item": trial[0],
+   				"text": trial[1],
+       			"question": trial[2],
+       			"type": trial[3],
+       			"checked": sThisVal,
+       			"asked": askedTime
+       		});
+  		});
+		remove_question();
+		next();
+	};
+
+	var finish = function() {
+		currentview = new Questionnaire();
+	};
+
+	var display_question = function(text, question, answertype, answers) {
+		d3.select("#text")
+			.data(jQuery.makeArray(text))
+			.append("p")
+			.text(function(d) { return d; });
+		d3.select("#question")
+			.data(jQuery.makeArray(question))
+			.append("p")
+			.text(function(d) { return d; });
+		if(answertype == "Free") {
+			d3.select("#free")
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append("input")
+				.attr("type", "text")
+				.attr("value", function(d) { return d; });
+		}
+		else if(answertype == "Radio") {
+			d3.select("#radio")
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append('label')
+					.attr('for',function(d,i){ return 'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "radio")
+				.attr("name", "radioanswer")
+				.attr("value", function(d) { return d; });
+		}
+		else if(answertype == "Check") {
+			d3.select("#check")
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append('label')
+					.attr('for',function(d,i){ return 'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "checkbox")
+				.attr("name", "checkboxanswer")
+				.attr("value", function(d) { return d; });
+		}
+	};
+	
+	var remove_question = function() {
+		d3.select("#text").selectAll("*").remove();
+		d3.select("#question").selectAll("*").remove();
+		d3.select("#free").selectAll("*").remove();
+		d3.select("#radio").selectAll("*").remove();
+		d3.select("#check").selectAll("*").remove();
+	};
+
+	psiTurk.showPage("stage.html");
+	$("input").focus().click(response_handler); 
+	next();
 };
 
 /****************

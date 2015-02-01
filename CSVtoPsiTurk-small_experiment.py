@@ -21,7 +21,7 @@ def parseAns (answerRow):
     print answerList
     return answerList
 
-######CHOOSING TASKS#######
+######CHOOSING TASKS####### WE don't really want this here; we'd rather choose&shuffle in the .js
 def getRandomItem (tasks):
     """Tasks is a list of lines from the CSV file. We assume that all of the elements
        have the same item number.
