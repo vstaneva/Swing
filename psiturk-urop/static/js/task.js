@@ -44,7 +44,6 @@ var instructionPages = [ // add as a list as many pages as you like
 /********************
 * STROOP TEST       *
 ********************/
-//put a KEYWORD here so python can insert the experiment data.
 var Experiment = function() {
 
 	var experimentTrials = [
@@ -73,12 +72,10 @@ var Experiment = function() {
 		["2", "", "", "", "The accountant wrote a report for the secretary.", "", "", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
 		["3", "", "", "", "The fox said, hatee-hatee-hatee-ho.", "", "", "What does the fox say?", "Free", ['Ring-ding? Hatee-ho?']],
 	];
-	//trials = _.shuffle(trials);
 
 	var trials = [];
 	
 	var shuffle_trials = function(){
-		console.log("You're in shuffle_trials()! Huzzah!");
 		var currItem = 1, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
 		for (i=0; i<experimentTrials.length; i++){
 			trial = experimentTrials[i];
@@ -116,11 +113,9 @@ var Experiment = function() {
 			chosenTrials = experimentTrials.slice(starti, lengthi+starti);
 			trials = trials.concat(chosenTrials);
 		}
-		console.log("You're on your way out of shuffle_trials()! Huzzah!");
 	}
 	var ind = 0;
 	var next = function() {
-		console.log("You're in next()! Huzzah!");
 		if(trials.length===0) {
 			finish();
 		}
@@ -136,15 +131,12 @@ var Experiment = function() {
 			askedTime= new Date().getTime();
 			//listening=true;
 		}
-		console.log("You're on your way out of next()! Huzzah!");
 	};
 	
 	var response_handler = function(e) {
-		console.log("***** You're in response_handler()! Huzzah!");
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
-       		console.log("***** look! something is happening in the handler.");
-       		alert (sThisVal);
+       		//alert (sThisVal);
        		psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
     			"phase": "test",
     			"item": trial[0],
@@ -155,25 +147,18 @@ var Experiment = function() {
        			"asked": askedTime
        		});
   		});
-		//remove_question(); //now we remove only at the end of a set.
 		next();
-		console.log("***** You're on your way our of response_handler()! Huzzah!");
 	};
 
 	var finish = function() {
-		console.log("You're in finish()! Huzzah!");
 		currentview = new Questionnaire();
-		console.log("You're on your way out of finish()! Huzzah!");
 	};
 	
 	var decide_flush = function(setNo, order) {
-		console.log("You're in decide_flush()! Huzzah!");
 		if(order == "1") remove_question();
-		console.log("You're on your way out of decide_flush()! Huzzah!");
 	}
 	
 	var make_new_elements = function(qNo, setNo, order) {
-		console.log("You're in make_new_elements()! Huzzah!");
 		d3.select("#trial")
 			.append("div")
 			.attr("id", "trial"+qNo);
@@ -203,15 +188,11 @@ var Experiment = function() {
 			.attr("id", "nextq"+qNo)
 			.attr("type", "button")
 			.attr("value", "Next question");
-		console.log("You're on your way out of make_new_elements()! Huzzah!");
 	}
 
 	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
-		console.log("You're in display_question()! Huzzah!");
-		console.log(setNo, order, text, question, answers);
 		decide_flush(setNo, order);
 		make_new_elements(qNo, setNo, order);
-		console.log("You're in back to display_question()! Huzzah!");
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
 			.append("p")
@@ -255,24 +236,14 @@ var Experiment = function() {
 				.attr("name", "checkboxanswer")
 				.attr("value", function(d) { return d; });
 		}
-		console.log("You're in just finished display_question()! Huzzah!");
 	};
 	
 	var remove_question = function() {
-		console.log("You're in remove_question()! Huzzah!");
 		d3.select("#trial").selectAll("*").remove();
-		
-		/*d3.select("#text").selectAll("*").remove();
-		d3.select("#question").selectAll("*").remove();
-		d3.select("#free").selectAll("*").remove();
-		d3.select("#radio").selectAll("*").remove();
-		d3.select("#check").selectAll("*").remove();*/
-		console.log("You're on your way out of remove_question()! Huzzah!");
 	};
 
 	psiTurk.showPage("stage.html");
-	shuffle_trials();
-	//$("#nextq").focus().click(response_handler); 
+	shuffle_trials(); 
 	next();
 	
 };
