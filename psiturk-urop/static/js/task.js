@@ -78,6 +78,7 @@ var Experiment = function() {
 	var trials = [];
 	
 	var shuffle_trials = function(){
+		console.log("You're in shuffle_trials()! Huzzah!");
 		var currItem = 1, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
 		for (i=0; i<experimentTrials.length; i++){
 			trial = experimentTrials[i];
@@ -108,20 +109,171 @@ var Experiment = function() {
 		//shuffle all the itemConditionPairs
 		itemConditionPairs = _.shuffle(itemConditionPairs);
 		//fill up the trials[] with these itemConditionPairs[]
-		console.log(itemConditionPairs);
 		for(i=0; i<itemConditionPairs.length; i++){
 			section = itemConditionPairs[i][1];
 			starti = section[1];
 			lengthi = section[2];
 			chosenTrials = experimentTrials.slice(starti, lengthi+starti);
-			console.log(chosenTrials);
 			trials = trials.concat(chosenTrials);
 		}
-	console.log(trials);
+		console.log("You're on your way out of shuffle_trials()! Huzzah!");
 	}
-	psiTurk.showPage('stage.html');
+	var ind = 0;
+	var next = function() {
+		console.log("You're in next()! Huzzah!");
+		if(trials.length===0) {
+			finish();
+		}
+		else {
+			if(trials.length===1){
+				d3.select("#nextq").
+					attr("value", "Submit");
+			}
+			trial=trials.shift();
+			ind++;
+			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+			$("#nextq"+ind).focus().click(response_handler); 
+			askedTime= new Date().getTime();
+			//listening=true;
+		}
+		console.log("You're on your way out of next()! Huzzah!");
+	};
+	
+	var response_handler = function(e) {
+		console.log("***** You're in response_handler()! Huzzah!");
+		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
+       		var sThisVal = $(this).val();
+       		console.log("***** look! something is happening in the handler.");
+       		alert (sThisVal);
+       		psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
+    			"phase": "test",
+    			"item": trial[0],
+   				"text": trial[1],
+       			"question": trial[2],
+       			"type": trial[3],
+       			"checked": sThisVal,
+       			"asked": askedTime
+       		});
+  		});
+		//remove_question(); //now we remove only at the end of a set.
+		next();
+		console.log("***** You're on your way our of response_handler()! Huzzah!");
+	};
+
+	var finish = function() {
+		console.log("You're in finish()! Huzzah!");
+		currentview = new Questionnaire();
+		console.log("You're on your way out of finish()! Huzzah!");
+	};
+	
+	var decide_flush = function(setNo, order) {
+		console.log("You're in decide_flush()! Huzzah!");
+		if(order == "1") remove_question();
+		console.log("You're on your way out of decide_flush()! Huzzah!");
+	}
+	
+	var make_new_elements = function(qNo, setNo, order) {
+		console.log("You're in make_new_elements()! Huzzah!");
+		d3.select("#trial")
+			.append("div")
+			.attr("id", "trial"+qNo);
+		d3.select("#trial"+qNo)
+			.append("div")
+			.attr("id", "text"+qNo);
+		d3.select("#trial"+qNo)
+			.append("div")
+			.attr("id", "question"+qNo);
+		d3.select("#trial"+qNo)
+			.append("div")
+			.attr("id", "answers"+qNo);
+		d3.select("#answers"+qNo)
+			.append("form")
+			.attr("id", "myForm"+qNo);
+		d3.select("#myForm"+qNo)
+			.append("div")
+			.attr("id", "radio"+qNo);
+		d3.select("#myForm"+qNo)
+			.append("div")
+			.attr("id", "check"+qNo);
+		d3.select("#myForm"+qNo)
+			.append("div")
+			.attr("id", "free"+qNo);
+		d3.select("#myForm"+qNo)
+			.append("input")
+			.attr("id", "nextq"+qNo)
+			.attr("type", "button")
+			.attr("value", "Next question");
+		console.log("You're on your way out of make_new_elements()! Huzzah!");
+	}
+
+	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
+		console.log("You're in display_question()! Huzzah!");
+		console.log(setNo, order, text, question, answers);
+		decide_flush(setNo, order);
+		make_new_elements(qNo, setNo, order);
+		console.log("You're in back to display_question()! Huzzah!");
+		d3.select("#text"+qNo)
+			.data(jQuery.makeArray(text))
+			.append("p")
+			.text(function(d) { return d; });
+		d3.select("#question"+qNo)
+			.data(jQuery.makeArray(question))
+			.append("p")
+			.text(function(d) { return d; });
+		if(answertype == "Free") {
+			d3.select("#free"+qNo)
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append("input")
+				.attr("type", "text")
+				.attr("value", function(d) { return d; });
+		}
+		else if(answertype == "Radio") {
+			d3.select("#radio"+qNo)
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append('label')
+					.attr('for',function(d,i){ return qNo+'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "radio")
+				.attr("name", "radioanswer")
+				.attr("value", function(d) { return d; });
+		}
+		else if(answertype == "Check") {
+			d3.select("#check"+qNo)
+				.selectAll("input")
+				.data(answers)
+				.enter()
+				.append('label')
+					.attr('for',function(d,i){ return qNo+'a'+i; })
+					.text(function(d) { return d; })
+				.append("input")
+				.attr("type", "checkbox")
+				.attr("name", "checkboxanswer")
+				.attr("value", function(d) { return d; });
+		}
+		console.log("You're in just finished display_question()! Huzzah!");
+	};
+	
+	var remove_question = function() {
+		console.log("You're in remove_question()! Huzzah!");
+		d3.select("#trial").selectAll("*").remove();
+		
+		/*d3.select("#text").selectAll("*").remove();
+		d3.select("#question").selectAll("*").remove();
+		d3.select("#free").selectAll("*").remove();
+		d3.select("#radio").selectAll("*").remove();
+		d3.select("#check").selectAll("*").remove();*/
+		console.log("You're on your way out of remove_question()! Huzzah!");
+	};
+
+	psiTurk.showPage("stage.html");
 	shuffle_trials();
-	//$("input").focus().click(shuffle_trials); 
+	//$("#nextq").focus().click(response_handler); 
+	next();
 	
 };
 
