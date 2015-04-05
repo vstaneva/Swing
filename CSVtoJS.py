@@ -32,7 +32,8 @@ def CSVtoJS(stuffing, path):
     	if (istimetowrite == 1):
     		print ('\tvar trials = [\n'),
     		for trial in stuffing:
-        		print ('\t\t["%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", %s],\n'%(trial[0],trial[1],trial[2], trial[3], trial[4], trial[5], trial[6], trial[7], trial[8], parseAns(trial[9]))),
+    			(s, o) = trial[4].split(',',1)
+        		print ('\t\t["%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", %s],\n'%(trial[1],trial[2],s,o, trial[3], trial[12], trial[13], trial[6], trial[7], parseAns(trial[8]))),
     		print ('\t];\n'),
     		istimetowrite = 2
     	else:
@@ -42,7 +43,7 @@ def CSVtoJS(stuffing, path):
 
 
 ######THIS RUNS EVERYTHING######
-tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/real_csv.csv")
+tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/csv_example_val.csv")
 JSfilepath = "/Users/val/Documents/UROP-Fall2015/urop/psiturk-urop/static/js/"
 CSVtoJS(tasklist, JSfilepath+"task1.js")
 
