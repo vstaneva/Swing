@@ -124,8 +124,15 @@ var Experiment = function() {
 				d3.select("#nextq").
 					attr("value", "Submit");
 			}
+			lastSetNo = trial[2];
+			lastOrder = trial[3];
+			lastItem = trial[0];
+			lastCond = trial[1];
 			trial=trials.shift();
 			ind++;
+			console.log(lastSetNo, lastOrder, ind);
+			decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
+			//decide_flush(ind-1, lastSetNo, lastOrder,)
 			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
 			$("#nextq"+ind).focus().click(response_handler); 
 			askedTime= new Date().getTime();
@@ -136,7 +143,7 @@ var Experiment = function() {
 	var response_handler = function(e) {
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
-       		//alert (sThisVal);
+       		alert (sThisVal);
        		psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
     			"phase": "test",
     			"item": trial[0],
@@ -154,8 +161,24 @@ var Experiment = function() {
 		currentview = new Questionnaire();
 	};
 	
-	var decide_flush = function(setNo, order) {
-		if(order == "1") remove_question();
+	var is_pair = function(i1, cond1, i2, cond2) {
+		if(i1==i2 && cond1==cond2) return 1;
+		return 0;
+	}
+	
+	/*var decide_flush = function(setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond) {
+		if((order == "1" && setNo!=nextSetNo) || !is_pair(curri, currCond, nexti, nextCond)) remove_question();
+	}*/
+	
+	var decide_hide_submit = function(qNo, setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond){
+		if(qNo==0) return;
+		//alert ("hey you're awesome!");
+		if(nextSetNo == setNo && is_pair(curri, currCond, nexti, nextCond)) { //questions go together, therefore remove the submit button of the last question
+			alert("Question that doesn't need the submission button: " +qNo);
+			$("#nextq"+qNo).hide();
+		}
+		//alert("Order of this question: "+order + "\nSet of this question: "+setNo);
+		if((nextOrder == "1" && setNo!=nextSetNo) || !is_pair(curri, currCond, nexti, nextCond)) remove_question();
 	}
 	
 	var make_new_elements = function(qNo, setNo, order) {
@@ -191,7 +214,7 @@ var Experiment = function() {
 	}
 
 	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
-		decide_flush(setNo, order);
+		//decide_flush(setNo, order);
 		make_new_elements(qNo, setNo, order);
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
