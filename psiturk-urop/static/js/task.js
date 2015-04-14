@@ -56,16 +56,16 @@ var Experiment = function() {
 		["2", "constraining_RCNP", "1", "1", "The accountant wrote a report for the secretary.", "", "", "Did the accountant contact someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "constraining_RCNP", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "constraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-		["3", "constraining_RCNP", "2", "2", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your short story here']],
+		["3", "constraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your short story here']],
 		["3", "constraining_NP2", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "constraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-		["3", "constraining_NP2", "2", "2", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+		["3", "constraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
 		["3", "unconstraining_RCNP", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "unconstraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-		["3", "unconstraining_RCNP", "2", "2", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+		["3", "unconstraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
 		["3", "unconstraining_NP2", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-		["3", "unconstraining_NP2", "2", "2", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+		["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
 	];
 	var practiceTrials = [
 		["1", "", "", "", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
@@ -115,54 +115,40 @@ var Experiment = function() {
 		}
 	}
 	var ind = 0;
-	var trial;
-	
+	var trial = [-1,-1,-1,-1];
+	var lastSetNo=(-1), lastOrder=(-1), lastItem=(-1), lastCond=(-1);
 	var next = function() {
-		if(trials.length===0) {
+		if(trials.length==0) {
 			finish();
 			return;
 		}
 		else {
-			if(trials.length===1){
-				d3.select("#nextq").
-					attr("value", "Submit");
-			}
-			var lastSetNo = (ind)? trial[2]: (-1);
-			var lastOrder = (ind)? trial[3]: (-1);
-			var lastItem = (ind)? trial[0]: (-1);
-			var lastCond = (ind)? trial[1]: (-1);
+			lastItem=trial[0]; lastCond=trial[1]; lastSetNo=trial[2]; lastOrder=trial[3];
 			trial=trials.shift();
-			console.log(trial[0], trial[1], trial[2], trial[3], ind, "***");
-			console.log("Compare with last:", lastItem, lastCond, lastSetNo, lastOrder, ind-1, "***");
-			if(ind) decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
-			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-			console.log(lastItem == trial[0] && lastCond == trial[1] && lastSetNo == trial[2] && lastOrder == trial[3]);
-			while(lastItem == trial[0] && lastCond == trial[1] && lastSetNo == trial[2] && lastOrder == trial[3]) { //display all questions in the same (set,order) together
-				lastSetNo = trial[2];
-				lastOrder = trial[3];
-				lastItem = trial[0];
-				lastCond = trial[1];
-				trial = trials.shift();
-				if(trials.length===0) {
-					finish();
-					return;
-				} 
-				console.log(trial[0], trial[1], trial[2], trial[3], ind, "###");
-				if(ind) decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
-				display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+			while(lastItem==trial[0]&&lastCond==trial[1]&&lastSetNo==trial[2]&&lastOrder==trial[3]){
+				alert("in da loop");
+				decide_hide_submit(ind, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
 				ind++;
+				display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+				$("#nextq"+ind).focus().click(response_handler);
+				askedTime= new Date().getTime();
+				if(trials.length==0){
+					return;
+				}
+				trial=trials.shift();
 			}
-			//i hope my while condition is actually correct, but i don't know why exactly it is
+			decide_hide_submit(ind, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
+			ind++;
+			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
 			$("#nextq"+ind).focus().click(response_handler);
 			askedTime= new Date().getTime();
-			ind++;
 		}
 	};
 	
 	var response_handler = function(e) {
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
-       		alert (sThisVal);
+       		//alert (sThisVal);
        		psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
     			"phase": "test",
     			"item": trial[0],
@@ -187,11 +173,14 @@ var Experiment = function() {
 	
 	var decide_hide_submit = function(qNo, setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond){
 		if(qNo<0) return;
-		console.log("is this and last question an item condition pair:", is_pair(curri, currCond, nexti, nextCond));
-		if(nextSetNo == setNo && is_pair(curri, currCond, nexti, nextCond)) { //questions go together, therefore remove the submit button of the last question
+		//alert ("is this a pair with the last one: " + is_pair(curri, currCond, nexti, nextCond));
+		//alert ("are this one and the last one in the same set: " + (setNo==nextSetNo));
+		if(nextSetNo == setNo && curri==nexti && currCond==nextCond) { //questions go together, therefore remove the submit button of the last question
 			$("#nextq"+qNo).hide();
+			alert("questions go together yay!");
+			return;
 		}
-		if((nextOrder == "1" && setNo!=nextSetNo) || !is_pair(curri, currCond, nexti, nextCond)) remove_question();
+		remove_question();
 	}
 	
 	var make_new_elements = function(qNo, setNo, order) {
@@ -227,9 +216,9 @@ var Experiment = function() {
 	}
 
 	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
-		console.log("Display", qNo);
 		//decide_flush(setNo, order);
 		make_new_elements(qNo, setNo, order);
+		//alert("Display next" +qNo);
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
 			.append("p")
@@ -273,6 +262,8 @@ var Experiment = function() {
 				.attr("name", "checkboxanswer")
 				.attr("value", function(d) { return d; });
 		}
+		
+		alert("Display next" +qNo);
 	};
 	
 	var remove_question = function() {
