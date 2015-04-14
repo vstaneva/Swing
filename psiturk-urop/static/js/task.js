@@ -151,13 +151,11 @@ var Experiment = function() {
 				if(ind) decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
 				display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
 				ind++;
-			}//;
-			// i hope my while condition is actually correct, but i don't know why exactly it is
-			//trials.unshift(trial)
+			}
+			//i hope my while condition is actually correct, but i don't know why exactly it is
 			$("#nextq"+ind).focus().click(response_handler);
 			askedTime= new Date().getTime();
 			ind++;
-			//listening=true;
 		}
 	};
 	
@@ -188,13 +186,11 @@ var Experiment = function() {
 	}
 	
 	var decide_hide_submit = function(qNo, setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond){
-		if(qNo==0) return;
+		if(qNo<0) return;
 		console.log("is this and last question an item condition pair:", is_pair(curri, currCond, nexti, nextCond));
-		//alert ("hey you're awesome!");
 		if(nextSetNo == setNo && is_pair(curri, currCond, nexti, nextCond)) { //questions go together, therefore remove the submit button of the last question
 			$("#nextq"+qNo).hide();
 		}
-		//alert("Order of this question: "+order + "\nSet of this question: "+setNo);
 		if((nextOrder == "1" && setNo!=nextSetNo) || !is_pair(curri, currCond, nexti, nextCond)) remove_question();
 	}
 	
