@@ -26419,3 +26419,13 @@ NameError: global name 'e' is not defined
 2015-04-14 01:05:01,553 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2015-04-14 01:05:01,558 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2015-04-14 01:05:01,562 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-04-14 05:12:24 -0400] [35259] [CRITICAL] WORKER TIMEOUT (pid:35264)
+[2015-04-14 05:12:24 -0400] [35259] [CRITICAL] WORKER TIMEOUT (pid:35265)
+[2015-04-14 05:12:24 -0400] [35259] [CRITICAL] WORKER TIMEOUT (pid:35266)
+[2015-04-14 05:12:24 -0400] [35259] [CRITICAL] WORKER TIMEOUT (pid:35267)
+[2015-04-14 05:12:24 -0400] [35259] [CRITICAL] WORKER TIMEOUT (pid:35269)
+2015-04-14 05:12:25,740 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-14 05:12:25,776 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-14 05:12:25,798 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-14 05:12:25,836 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-14 05:12:25,862 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
