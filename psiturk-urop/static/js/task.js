@@ -78,7 +78,7 @@ var Experiment = function() {
 	var shuffle_trials = function(){
 		var currItem = 1, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
 		for (i=0; i<experimentTrials.length; i++){
-			trial = experimentTrials[i];
+			var trial = experimentTrials[i];
 			if(parseInt(trial[0]) !== currItem){ //look! it's a new item
 				//choosing which (item, condition) pair to show
 				choseni = (~~(Math.random() * (currConditions.length)));
@@ -115,27 +115,48 @@ var Experiment = function() {
 		}
 	}
 	var ind = 0;
+	var trial;
+	
 	var next = function() {
 		if(trials.length===0) {
 			finish();
+			return;
 		}
 		else {
 			if(trials.length===1){
 				d3.select("#nextq").
 					attr("value", "Submit");
 			}
-			lastSetNo = trial[2];
-			lastOrder = trial[3];
-			lastItem = trial[0];
-			lastCond = trial[1];
+			var lastSetNo = (ind)? trial[2]: (-1);
+			var lastOrder = (ind)? trial[3]: (-1);
+			var lastItem = (ind)? trial[0]: (-1);
+			var lastCond = (ind)? trial[1]: (-1);
 			trial=trials.shift();
-			ind++;
-			console.log(lastSetNo, lastOrder, ind);
-			decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
-			//decide_flush(ind-1, lastSetNo, lastOrder,)
+			console.log(trial[0], trial[1], trial[2], trial[3], ind, "***");
+			console.log("Compare with last:", lastItem, lastCond, lastSetNo, lastOrder, ind-1, "***");
+			if(ind) decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
 			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-			$("#nextq"+ind).focus().click(response_handler); 
+			console.log(lastItem == trial[0] && lastCond == trial[1] && lastSetNo == trial[2] && lastOrder == trial[3]);
+			while(lastItem == trial[0] && lastCond == trial[1] && lastSetNo == trial[2] && lastOrder == trial[3]) { //display all questions in the same (set,order) together
+				lastSetNo = trial[2];
+				lastOrder = trial[3];
+				lastItem = trial[0];
+				lastCond = trial[1];
+				trial = trials.shift();
+				if(trials.length===0) {
+					finish();
+					return;
+				} 
+				console.log(trial[0], trial[1], trial[2], trial[3], ind, "###");
+				if(ind) decide_hide_submit(ind-1, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
+				display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+				ind++;
+			}//;
+			// i hope my while condition is actually correct, but i don't know why exactly it is
+			//trials.unshift(trial)
+			$("#nextq"+ind).focus().click(response_handler);
 			askedTime= new Date().getTime();
+			ind++;
 			//listening=true;
 		}
 	};
@@ -166,15 +187,11 @@ var Experiment = function() {
 		return 0;
 	}
 	
-	/*var decide_flush = function(setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond) {
-		if((order == "1" && setNo!=nextSetNo) || !is_pair(curri, currCond, nexti, nextCond)) remove_question();
-	}*/
-	
 	var decide_hide_submit = function(qNo, setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond){
 		if(qNo==0) return;
+		console.log("is this and last question an item condition pair:", is_pair(curri, currCond, nexti, nextCond));
 		//alert ("hey you're awesome!");
 		if(nextSetNo == setNo && is_pair(curri, currCond, nexti, nextCond)) { //questions go together, therefore remove the submit button of the last question
-			alert("Question that doesn't need the submission button: " +qNo);
 			$("#nextq"+qNo).hide();
 		}
 		//alert("Order of this question: "+order + "\nSet of this question: "+setNo);
@@ -214,6 +231,7 @@ var Experiment = function() {
 	}
 
 	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
+		console.log("Display", qNo);
 		//decide_flush(setNo, order);
 		make_new_elements(qNo, setNo, order);
 		d3.select("#text"+qNo)
