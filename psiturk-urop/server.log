@@ -26243,3 +26243,12 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
     raise TemplateNotFound(template)
 TemplateNotFound: apple-touch-icon.png
+2015-04-10 15:19:10,204 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,399 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,436 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,471 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,524 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,575 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,604 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,627 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-04-10 15:19:10,641 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
