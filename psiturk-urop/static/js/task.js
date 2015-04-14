@@ -113,39 +113,26 @@ var Experiment = function() {
 			chosenTrials = experimentTrials.slice(starti, lengthi+starti);
 			trials = trials.concat(chosenTrials);
 		}
+		//trials.push(["last", "last", "last", "last", "last", "last", "last", "last", "last", "last", "last"]);
 	}
 	var ind = 0;
-	var trial = [-1,-1,-1,-1];
-	var lastSetNo=(-1), lastOrder=(-1), lastItem=(-1), lastCond=(-1);
 	var next = function() {
+		alert(ind+"*"); // why, when we end up with the 3-4-5 about the "leading lady", we get "5*" as well? hmmm...
 		if(trials.length==0) {
 			finish();
 			return;
 		}
 		else {
-			lastItem=trial[0]; lastCond=trial[1]; lastSetNo=trial[2]; lastOrder=trial[3];
 			trial=trials.shift();
-			while(lastItem==trial[0]&&lastCond==trial[1]&&lastSetNo==trial[2]&&lastOrder==trial[3]){
-				alert("in da loop");
-				decide_hide_submit(ind, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
-				ind++;
-				display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-				$("#nextq"+ind).focus().click(response_handler);
-				askedTime= new Date().getTime();
-				if(trials.length==0){
-					return;
-				}
-				trial=trials.shift();
-			}
-			decide_hide_submit(ind, lastSetNo, lastOrder, trial[2], trial[3], lastItem, lastCond, trial[0], trial[1]);
 			ind++;
-			display_question(ind, trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-			$("#nextq"+ind).focus().click(response_handler);
+			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+			$("#nextq"+ind).focus().click(response_handler); //this is problematic at the last step, idk why...
 			askedTime= new Date().getTime();
 		}
 	};
 	
 	var response_handler = function(e) {
+		alert(ind);
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
        		//alert (sThisVal);
@@ -158,32 +145,16 @@ var Experiment = function() {
        			"checked": sThisVal,
        			"asked": askedTime
        		});
-  		});
+		remove_question();
 		next();
+  		});
 	};
 
 	var finish = function() {
 		currentview = new Questionnaire();
 	};
 	
-	var is_pair = function(i1, cond1, i2, cond2) {
-		if(i1==i2 && cond1==cond2) return 1;
-		return 0;
-	}
-	
-	var decide_hide_submit = function(qNo, setNo, order, nextSetNo, nextOrder, curri, currCond, nexti, nextCond){
-		if(qNo<0) return;
-		//alert ("is this a pair with the last one: " + is_pair(curri, currCond, nexti, nextCond));
-		//alert ("are this one and the last one in the same set: " + (setNo==nextSetNo));
-		if(nextSetNo == setNo && curri==nexti && currCond==nextCond) { //questions go together, therefore remove the submit button of the last question
-			$("#nextq"+qNo).hide();
-			alert("questions go together yay!");
-			return;
-		}
-		remove_question();
-	}
-	
-	var make_new_elements = function(qNo, setNo, order) {
+	var make_new_elements = function(qNo) {
 		d3.select("#trial")
 			.append("div")
 			.attr("id", "trial"+qNo);
@@ -215,10 +186,9 @@ var Experiment = function() {
 			.attr("value", "Next question");
 	}
 
-	var display_question = function(qNo, setNo, order, text, question, answertype, answers) {
-		//decide_flush(setNo, order);
-		make_new_elements(qNo, setNo, order);
-		//alert("Display next" +qNo);
+	var display_question = function(qNo, item, cond, setNo, order, text, question, answertype, answers) {
+		alert("Display:" +qNo);
+		make_new_elements(qNo);
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
 			.append("p")
@@ -262,8 +232,17 @@ var Experiment = function() {
 				.attr("name", "checkboxanswer")
 				.attr("value", function(d) { return d; });
 		}
-		
-		alert("Display next" +qNo);
+		//check if next question also should go with this one
+		if(trials.length==0){
+			return;
+		}
+		var trialk = trials.shift();
+		if(trialk[0]==item && trialk[1]==cond && trialk[2]==setNo && trialk[3]==order){
+			$("#nextq"+qNo).hide();
+			ind++;
+			display_question(ind, trialk[0], trialk[1], trialk[2], trialk[3], trialk[4], trialk[7], trialk[8], trialk[9]);
+		}
+		else trials.unshift(trialk);
 	};
 	
 	var remove_question = function() {
