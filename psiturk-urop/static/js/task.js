@@ -112,11 +112,9 @@ var Experiment = function() {
 			chosenTrials = experimentTrials.slice(starti, lengthi+starti);
 			trials = trials.concat(chosenTrials);
 		}
-		//trials.push(["last", "last", "last", "last", "last", "last", "last", "last", "last", "last", "last"]);
 	}
 	var ind = 0, askedTime, trial;
 	var next = function() {
-		//alert(ind+" * " + trials.length); // why, when we end up with the 3-4-5 about the "leading lady", we get "5*" as well? hmmm...
 		if(trials.length==0) {
 			finish();
 			return;
@@ -125,14 +123,13 @@ var Experiment = function() {
 			trial=trials.shift();
 			ind++;
 			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-			//alert ("we returned to next() at: "+ind+" at" + trial);
 			askedTime= new Date().getTime();
-			$("#nextq"+ind).focus().click(response_handler); //the placeholder is never created after the double question
+			$("#nextq"+ind).focus().click(function(){response_handler();}); //the placeholder is never created after the double question
 		}
 	};
 	
 	var response_handler = function(e) {
-		alert("response handler called at: " +ind);
+		var answered = false;
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
        		//alert (sThisVal);
@@ -145,9 +142,12 @@ var Experiment = function() {
        			"checked": sThisVal,
        			"asked": askedTime
        		});
-		//remove_question();
-		next();
+       	answered = true;
   		});
+  		if(answered){
+			remove_question();
+			next();
+			}
 	};
 
 	var finish = function() {
@@ -183,7 +183,6 @@ var Experiment = function() {
 			.append("input")
 			.attr("id", "nextq"+qNo)
 			.attr("type", "button")
-			.attr("autofocus", "true")
 			.attr("value", "Next question");
 	}
 
@@ -233,24 +232,19 @@ var Experiment = function() {
 				.attr("value", function(d) { return d; });
 		}
 		//check if next question also should go with this one
-		//alert (ind + " # "+ trials.length);
 		if(trials.length==0){
 			return;
 		}
-		trial = trials.shift();
+		trial = trials[0];
 		if(trial[0]==item && trial[1]==cond && trial[2]==setNo && trial[3]==order){
-			$("#nextq"+qNo).hide();
+			d3.select("#nextq"+qNo).remove();
 			ind++;
+			trial = trials.shift();
 			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-		}
-		else{
-			//alert ("we're unshifting.");
-			trials.unshift(trial); 
 		}
 	};
 	
 	var remove_question = function() {
-		alert ("removing; current q: "+ind);
 		d3.select("#trial").selectAll("*").remove();
 	};
 
