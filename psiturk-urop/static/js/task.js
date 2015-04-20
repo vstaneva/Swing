@@ -3,7 +3,6 @@
  *     psiturk.js
  *     utils.js
  */
-
 // Initalize psiturk object
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
@@ -77,7 +76,7 @@ var Experiment = function() {
 	
 	var shuffle_trials = function(){
 		var currItem = 1, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
-		for (i=0; i<experimentTrials.length; i++){
+		for (var i=0; i<experimentTrials.length; i++){
 			var trial = experimentTrials[i];
 			if(parseInt(trial[0]) !== currItem){ //look! it's a new item
 				//choosing which (item, condition) pair to show
@@ -115,9 +114,9 @@ var Experiment = function() {
 		}
 		//trials.push(["last", "last", "last", "last", "last", "last", "last", "last", "last", "last", "last"]);
 	}
-	var ind = 0;
+	var ind = 0, askedTime, trial;
 	var next = function() {
-		alert(ind+"*"); // why, when we end up with the 3-4-5 about the "leading lady", we get "5*" as well? hmmm...
+		//alert(ind+" * " + trials.length); // why, when we end up with the 3-4-5 about the "leading lady", we get "5*" as well? hmmm...
 		if(trials.length==0) {
 			finish();
 			return;
@@ -126,13 +125,14 @@ var Experiment = function() {
 			trial=trials.shift();
 			ind++;
 			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
-			$("#nextq"+ind).focus().click(response_handler); //this is problematic at the last step, idk why...
+			//alert ("we returned to next() at: "+ind+" at" + trial);
 			askedTime= new Date().getTime();
+			$("#nextq"+ind).focus().click(response_handler); //the placeholder is never created after the double question
 		}
 	};
 	
 	var response_handler = function(e) {
-		alert(ind);
+		alert("response handler called at: " +ind);
 		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
        		//alert (sThisVal);
@@ -145,7 +145,7 @@ var Experiment = function() {
        			"checked": sThisVal,
        			"asked": askedTime
        		});
-		remove_question();
+		//remove_question();
 		next();
   		});
 	};
@@ -183,11 +183,11 @@ var Experiment = function() {
 			.append("input")
 			.attr("id", "nextq"+qNo)
 			.attr("type", "button")
+			.attr("autofocus", "true")
 			.attr("value", "Next question");
 	}
 
 	var display_question = function(qNo, item, cond, setNo, order, text, question, answertype, answers) {
-		alert("Display:" +qNo);
 		make_new_elements(qNo);
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
@@ -233,19 +233,24 @@ var Experiment = function() {
 				.attr("value", function(d) { return d; });
 		}
 		//check if next question also should go with this one
+		//alert (ind + " # "+ trials.length);
 		if(trials.length==0){
 			return;
 		}
-		var trialk = trials.shift();
-		if(trialk[0]==item && trialk[1]==cond && trialk[2]==setNo && trialk[3]==order){
+		trial = trials.shift();
+		if(trial[0]==item && trial[1]==cond && trial[2]==setNo && trial[3]==order){
 			$("#nextq"+qNo).hide();
 			ind++;
-			display_question(ind, trialk[0], trialk[1], trialk[2], trialk[3], trialk[4], trialk[7], trialk[8], trialk[9]);
+			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
 		}
-		else trials.unshift(trialk);
+		else{
+			//alert ("we're unshifting.");
+			trials.unshift(trial); 
+		}
 	};
 	
 	var remove_question = function() {
+		alert ("removing; current q: "+ind);
 		d3.select("#trial").selectAll("*").remove();
 	};
 
@@ -263,7 +268,7 @@ var Questionnaire = function() {
 
 	var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
 
-	record_responses = function() {
+	var record_responses = function() {
 
 		psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
 
@@ -276,12 +281,12 @@ var Questionnaire = function() {
 
 	};
 
-	prompt_resubmit = function() {
+	var prompt_resubmit = function() {
 		replaceBody(error_message);
 		$("#resubmit").click(resubmit);
 	};
 
-	resubmit = function() {
+	var resubmit = function() {
 		replaceBody("<h1>Trying to resubmit...</h1>");
 		reprompt = setTimeout(prompt_resubmit, 10000);
 		
