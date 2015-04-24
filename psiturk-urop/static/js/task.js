@@ -65,6 +65,10 @@ var Experiment = function() {
 		["3", "unconstraining_NP2", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
 		["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
 		["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+		["4", "unconstraining_NP2", "1", "1", "The editor works every day of the week.", "", "", "When does the editor work?", "Slider", ['Never', 'Always']],
+		["4", "constraining_NP2", "1", "1", "The editor works only on weekends.", "", "", "When does the editor work?", "Slider", ['Never', 'Always']],
+		["4", "constraining_RCNP", "1", "1", "The editor works only on Monday, Wednesday, and on weekends.", "", "", "When does the editor work?", "Slider", ['Never', 'Always']],
+		["5", "constraining_RCNP", "1", "1", "Caroline last ate at 6pm.", "http://cdn.foodbeast.com/content/uploads/2015/04/SP-Pizza-Chowder.jpg", "", "How hungry is Caroline?", "Slider", ['Not hungry at all', 'Very hungry']],
 	];
 	var practiceTrials = [
 		["1", "", "", "", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
@@ -113,7 +117,7 @@ var Experiment = function() {
 			trials = trials.concat(chosenTrials);
 		}
 	}
-	var ind = 0, askedTime, trial;
+	var ind = 0, askedTime, trial, last=-1;
 	var next = function() {
 		if(trials.length==0) {
 			finish();
@@ -122,17 +126,29 @@ var Experiment = function() {
 		else {
 			trial=trials.shift();
 			ind++;
-			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[5], trial[7], trial[8], trial[9]);
 			askedTime= new Date().getTime();
-			$("#nextq"+ind).focus().click(function(){response_handler();}); //the placeholder is never created after the double question
+			$("#nextq"+ind).focus().click(function(){response_handler(ind);}); //the placeholder is never created after the double question
 		}
 	};
 	
-	var response_handler = function(e) {
+	var response_handler = function(e, qNo) {
 		var answered = false;
-		$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
+		if(last>=0 && last<=100){
+			answered = true;
+			alert(last);
+			/*psiturk.recordTrialData({ //figure out how to record the data from the slider! :)
+    			"phase": "test",
+    			"item": trial[0],
+   				"text": trial[1],
+       			"question": trial[2],
+       			"type": trial[3],
+       			"checked": last,
+       			"asked": askedTime
+       		});*/
+		}
+		else $("input:checkbox:checked, input:radio:checked, input:text").each(function () {
        		var sThisVal = $(this).val();
-       		//alert (sThisVal);
        		psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
     			"phase": "test",
     			"item": trial[0],
@@ -163,6 +179,9 @@ var Experiment = function() {
 			.attr("id", "text"+qNo);
 		d3.select("#trial"+qNo)
 			.append("div")
+			.attr("id", "picture"+qNo);
+		d3.select("#trial"+qNo)
+			.append("div")
 			.attr("id", "question"+qNo);
 		d3.select("#trial"+qNo)
 			.append("div")
@@ -180,18 +199,28 @@ var Experiment = function() {
 			.append("div")
 			.attr("id", "free"+qNo);
 		d3.select("#myForm"+qNo)
+			.append("span")
+			.append("div")
+			.attr("id", "slider"+qNo);
+		d3.select("#myForm"+qNo)
 			.append("input")
 			.attr("id", "nextq"+qNo)
 			.attr("type", "button")
 			.attr("value", "Next question");
 	}
 
-	var display_question = function(qNo, item, cond, setNo, order, text, question, answertype, answers) {
+	var display_question = function(qNo, item, cond, setNo, order, text, picture, question, answertype, answers) {
 		make_new_elements(qNo);
+		last = -1;
 		d3.select("#text"+qNo)
 			.data(jQuery.makeArray(text))
 			.append("p")
 			.text(function(d) { return d; });
+		if(picture!="") d3.select("#picture"+qNo)
+			.data(jQuery.makeArray(picture))
+			.append("img")
+			.attr("height", "250px")
+			.attr("src", function(d){return d;})
 		d3.select("#question"+qNo)
 			.data(jQuery.makeArray(question))
 			.append("p")
@@ -231,6 +260,26 @@ var Experiment = function() {
 				.attr("name", "checkboxanswer")
 				.attr("value", function(d) { return d; });
 		}
+		else if(answertype == "Slider"){
+			d3.select("#slider"+qNo)
+				.append("span")
+				.attr("id", "left")
+				.style({"float":"left", "padding":"15px"})
+				.text(answers[0]);
+				$("#slider"+qNo).slider(
+					{
+					slide: function(event, ui) {
+        				last = ui.value;
+   		 			}	
+				});
+			d3.select("#slider"+qNo)
+				.append("span")
+				.attr("id", "right")
+				.style({"float":"right", "padding":"15px"})
+				.text(answers[1]);
+			d3.select("#nextq"+qNo)
+				.style({"margin":"15px"});
+			}
 		//check if next question also should go with this one
 		if(trials.length==0){
 			return;
@@ -240,7 +289,7 @@ var Experiment = function() {
 			d3.select("#nextq"+qNo).remove();
 			ind++;
 			trial = trials.shift();
-			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[7], trial[8], trial[9]);
+			display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4],trial[5], trial[7], trial[8], trial[9]);
 		}
 	};
 	
