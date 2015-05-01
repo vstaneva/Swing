@@ -43,8 +43,51 @@ var instructionPages = [ // add as a list as many pages as you like
 /********************
 * STROOP TEST       *
 ********************/
-var Experiment = function () {
 
+/**
+ * Presents the experiment described in the input CSV file. This function does
+ * not return a value.
+ * 
+ * @class Experiment
+ */
+var Experiment = function () {
+	/**
+	 * This array is injected into the code by Swing's Python CSV parser.
+	 * 
+ 	 * There is the following hierarchy in the way experiments are structured:
+ 	 * -- There are several items in an experiment, such that the participants
+ 	 *    see each item
+ 	 * -- Each item has a number of conditions, such that the participants
+ 	 *    see only one condition per item
+ 	 * -- Each (item, condition) pair has several questions that are shown
+ 	 * -- Each of these questions belongs to a (set, order) pair, such that
+ 	 *    all the questions in the same set appear in the same screen
+ 	 *    and all the questions in the same set appear by their order number.
+ 	 *    This way, for a particular set, first are displayed the questions
+ 	 *    with order=1, then the questions with order=2 and so on.
+	 * 
+	 * Moreover, the trials consist of the following elements, ordered by their index:
+	 * [0]: item
+	 * [1]: condition
+	 * [2]: set
+	 * [3]: order
+	 * [4]: text prompt ("" if no text prompt)
+	 * [5]: picture prompt ("" if no picture prompt)
+	 * [6]: audio prompt ("" if no audio prompt)
+	 * [7]: question
+	 * [8]: answer type -- can be any of the following:
+	 * -- "Radio" for radio buttons
+	 * -- "Check" for checkboxes (multiple choice)
+	 * -- "Free" for a textbox
+	 * -- "Slider" for a jQuery UI slider. Note that the slider's left side is always 0
+	 *    and its right side is always 100
+	 * [9]: answers --
+	 * -- for "Radio" and "Check", the options that the participant can choose among
+	 * -- for "Free", a suggested text that can be filled in.
+	 * -- for "Slider", the labels on the left and right side of the slider.
+	 *
+	 * @class experimentTrials
+	 */
     var experimentTrials = [
         ["1", "unconstraining_NP2", "1", "1", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["1", "constraining_NP2", "1", "1", "The editor hired the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
@@ -70,6 +113,16 @@ var Experiment = function () {
         ["4", "constraining_RCNP", "1", "1", "The editor works only on Monday, Wednesday, and on weekends.", "", "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3", "When does the editor work?", "Slider", ['Never', 'Always']],
         ["5", "constraining_RCNP", "1", "1", "Caroline last ate at 6pm.", "http://cdn.foodbeast.com/content/uploads/2015/04/SP-Pizza-Chowder.jpg", "", "How hungry is Caroline?", "Slider", ['Not hungry at all', 'Very hungry']]
     ];
+    
+    /**
+ 	 * The practice trials are shown before the real experiment trials. Therefore,
+ 	 * practiceTrials[] does not need to be injected by another script
+ 	 * and is not expected to change.
+ 	 * 
+ 	 * The array has the same structure as experimentTrials[].
+	 *
+	 * @class experimentTrials
+	 */
     var practiceTrials = [
         ["1", "", "", "", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["2", "", "", "", "The accountant wrote a report for the secretary.", "", "", "Did the accountant contact someone?", "Check", ['Yes', 'No', 'Maybe']],
@@ -78,6 +131,17 @@ var Experiment = function () {
 
     var trials = [];
     
+    /**
+ 	 * Choose and finish the trials that do into the experiment. For each item, the
+ 	 * function chooses which condition to display. Trials are then shuffled by item,
+ 	 * so that trials that belong to the same (item, condition) pair are not internally
+ 	 * shuffled -- this way, the (set, order) of the questions in this (item, condition)
+ 	 * pair is preserved.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class shuffle_trials
+	 */
     var shuffle_trials = function () {
         var currItem = 1, i, trial, starti = 0, lengthi = 0, section = [], chosenTrials = [], currConditions = [], itemConditionPairs = [], choseni, currCond = "";
         for (i = 0; i < experimentTrials.length; i += 1) {
@@ -116,7 +180,17 @@ var Experiment = function () {
             trials = trials.concat(chosenTrials);
         }
     };
+    
     var ind = 0, askedTime, trial, last = -1;
+    
+    /**
+ 	 * Display the next questions. This function is responsible only
+ 	 * for the first question in a particular order. It is also responsible
+ 	 * for calling the response_handler function.
+ 	 * This function does not return a value.
+	 * 
+	 * @class shuffle_trials
+	 */
     var next = function () {
         if (trials.length == 0) {
             finish();
@@ -130,6 +204,19 @@ var Experiment = function () {
         }
     };
     
+    /**
+ 	 * Activated in next() by the click() functionality. This function handles clicking
+ 	 * the "Next question" button. It checks if the current questions are answered:
+ 	 * -- "Radio", "Check", "Free" are <input> elements and can be checked internally
+ 	 * -- "Slider" is a jQuery UI element, therefore we have to manually check
+ 	 *    whether a slider question has been answered or not.
+ 	 * If the questions have been answered, the function records the answers, flushes
+ 	 * the questions from the screen and proceeds to display the next questions.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class response_handler
+	 */
     var response_handler = function (e, qNo) {
         var answered = false;
         if (last >= 0 && last <= 100) {
@@ -165,10 +252,25 @@ var Experiment = function () {
         }
     };
 
+	/**
+ 	 * If all the questions have been displayed, the experiment is over and
+ 	 * we are re-directed to the post-experiment questionnaire.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class finish
+	 */
     var finish = function () {
         currentview = new Questionnaire();
     };
     
+    /**
+     * This function used the d3 library to create tag placeholders for new questions.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class make_new_elements
+	 */
     var make_new_elements = function (qNo) {
         d3.select("#trial")
             .append("div")
@@ -211,6 +313,16 @@ var Experiment = function () {
             .attr("value", "Next question");
     };
 
+	/**
+	 * This function fills in the questions in the tag placeholders. If there are
+	 * more than one questions with the same (item, condition, set, order),
+	 * the function calls itself recursively to fill all these questions
+	 * so that they appear on the screen at the same time.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class display_question
+	 */
     var display_question = function (qNo, item, cond, setNo, order, text, picture, audio, question, answertype, answers) {
         make_new_elements(qNo);
         last = -1;
@@ -304,6 +416,13 @@ var Experiment = function () {
         }
     };
     
+    /**
+ 	 * This function flushes the screen after the response_handler() calls it.
+ 	 * 
+ 	 * This function does not return a value.
+	 * 
+	 * @class remove_question
+	 */
     var remove_question = function() {
         d3.select("#trial").selectAll("*").remove();
     };
