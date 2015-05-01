@@ -216,6 +216,8 @@ var Experiment = function () {
  	 * This function does not return a value.
 	 * 
 	 * @class response_handler
+	 * @param {event} e -- the event that the button is clicked
+	 * @param {number} qNo -- the number of the question
 	 */
     var response_handler = function (e, qNo) {
         var answered = false;
@@ -270,6 +272,7 @@ var Experiment = function () {
  	 * This function does not return a value.
 	 * 
 	 * @class make_new_elements
+	 * @param {number} qNo -- the number of the question
 	 */
     var make_new_elements = function (qNo) {
         d3.select("#trial")
@@ -322,6 +325,16 @@ var Experiment = function () {
  	 * This function does not return a value.
 	 * 
 	 * @class display_question
+	 * @param {number} qNo -- the number of the question
+	 * @param {string} item -- the item of the question
+	 * @param {string} cond -- the condition of the question
+	 * @param {string} setNo -- the set of the question
+	 * @param {string} order -- the order of the question within the set
+	 * @param {string} text -- the text prompt of the question (can be "")
+	 * @param {string} picture -- the picture prompt of the question (can be "")
+	 * @param {string} audio -- the audio prompt of the question (can be "")
+	 * @param {string} answerType -- the type of answer (e.g. "Slider")
+	 * @param {string} answers -- the array of answers/labels
 	 */
     var display_question = function (qNo, item, cond, setNo, order, text, picture, audio, question, answertype, answers) {
         make_new_elements(qNo);
