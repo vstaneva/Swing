@@ -52,41 +52,41 @@ var instructionPages = [ // add as a list as many pages as you like
  */
 var Experiment = function () {
 	/**
-	 * This array is injected into the code by Swing's Python CSV parser.
+	 * <p>This array is injected into the code by Swing's Python CSV parser.</p>
 	 * 
- 	 * There is the following hierarchy in the way experiments are structured:
+ 	 * <p>There is the following hierarchy in the way experiments are structured:<br>
  	 * -- There are several items in an experiment, such that the participants
- 	 *    see each item
+ 	 *    see each item<br>
  	 * -- Each item has a number of conditions, such that the participants
- 	 *    see only one condition per item
- 	 * -- Each (item, condition) pair has several questions that are shown
+ 	 *    see only one condition per item<br>
+ 	 * -- Each (item, condition) pair has several questions that are shown<br>
  	 * -- Each of these questions belongs to a (set, order) pair, such that
  	 *    all the questions in the same set appear in the same screen
  	 *    and all the questions in the same set appear by their order number.
  	 *    This way, for a particular set, first are displayed the questions
- 	 *    with order=1, then the questions with order=2 and so on.
+ 	 *    with order=1, then the questions with order=2 and so on.</p>
 	 * 
-	 * Moreover, the trials consist of the following elements, ordered by their index:
-	 * [0]: item
-	 * [1]: condition
-	 * [2]: set
-	 * [3]: order
-	 * [4]: text prompt ("" if no text prompt)
-	 * [5]: picture prompt ("" if no picture prompt)
-	 * [6]: audio prompt ("" if no audio prompt)
-	 * [7]: question
-	 * [8]: answer type -- can be any of the following:
-	 * -- "Radio" for radio buttons
-	 * -- "Check" for checkboxes (multiple choice)
-	 * -- "Free" for a textbox
+	 * <p>Moreover, the trials consist of the following elements, ordered by their index:<br>
+	 * [0]: item<br>
+	 * [1]: condition<br>
+	 * [2]: set<br>
+	 * [3]: order<br>
+	 * [4]: text prompt ("" if no text prompt)<br>
+	 * [5]: picture prompt ("" if no picture prompt)<br>
+	 * [6]: audio prompt ("" if no audio prompt)<br>
+	 * [7]: question<br>
+	 * [8]: answer type -- can be any of the following:<br>
+	 * -- "Radio" for radio buttons<br>
+	 * -- "Check" for checkboxes (multiple choice)<br>
+	 * -- "Free" for a textbox<br>
 	 * -- "Slider" for a jQuery UI slider. Note that the slider's left side is always 0
-	 *    and its right side is always 100
-	 * [9]: answers --
-	 * -- for "Radio" and "Check", the options that the participant can choose among
-	 * -- for "Free", a suggested text that can be filled in.
-	 * -- for "Slider", the labels on the left and right side of the slider.
+	 *    and its right side is always 100<br>
+	 * [9]: answers --<br>
+	 * -- for "Radio" and "Check", the options that the participant can choose among<br>
+	 * -- for "Free", a suggested text that can be filled in.<br>
+	 * -- for "Slider", the labels on the left and right side of the slider.<p>
 	 *
-	 * @class experimentTrials
+	 * @name experimentTrials
 	 */
     var experimentTrials = [
         ["1", "unconstraining_NP2", "1", "1", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
@@ -121,7 +121,7 @@ var Experiment = function () {
  	 * 
  	 * The array has the same structure as experimentTrials[].
 	 *
-	 * @class experimentTrials
+	 * @name practiceTrials
 	 */
     var practiceTrials = [
         ["1", "", "", "", "The editor saw the reporter.", "", "", "Did the editor see someone?", "Radio", ['Yes', 'No', 'Maybe']],
