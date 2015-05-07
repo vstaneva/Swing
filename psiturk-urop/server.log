@@ -27862,3 +27862,21 @@ OperationalError: (OperationalError) table turkdemo already exists u'\nCREATE TA
 2015-05-06 22:49:21,949 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2015-05-06 22:49:21,978 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
 2015-05-06 22:49:22,011 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33351)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33352)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33353)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33354)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33355)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33356)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33357)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33358)
+[2015-05-07 00:54:23 -0400] [31432] [CRITICAL] WORKER TIMEOUT (pid:33359)
+2015-05-07 00:54:24,509 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,546 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,567 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,601 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,697 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,731 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,741 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,742 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-05-07 00:54:24,821 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js

@@ -98,16 +98,16 @@ var Experiment = function () {
         ["2", "constraining_RCNP", "1", "1", "The accountant wrote a report for the secretary.", "", "", "Did the accountant contact someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["3", "constraining_RCNP", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["3", "constraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-        ["3", "constraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your short story here']],
+        ["3", "constraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Textarea", ['Please write your short story here']],
         ["3", "constraining_NP2", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["3", "constraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-        ["3", "constraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+        ["3", "constraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Textarea", ['Please write your story here']],
         ["3", "unconstraining_RCNP", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["3", "unconstraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-        ["3", "unconstraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+        ["3", "unconstraining_RCNP", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Textarea", ['Please write your story here']],
         ["3", "unconstraining_NP2", "1", "1", "The leading lady shared a scene with the comedian.", "", "", "Did the leading lady forget someone?", "Radio", ['Yes', 'No', 'Maybe']],
         ["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Enter a number between 1 and 100.", "Free", ['Please type your number here']],
-        ["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Free", ['Please write your story here']],
+        ["3", "unconstraining_NP2", "2", "1", "The leading lady shared a scene with the comedian.", "", "", "Write a short story for us.", "Textarea", ['Please write your story here']],
         ["4", "unconstraining_NP2", "1", "1", "The editor works every day of the week.", "", "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3", "When does the editor work?", "Slider", ['Never', 'Always']],
         ["4", "constraining_NP2", "1", "1", "The editor works only on weekends.", "", "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3", "When does the editor work?", "Slider", ['Never', 'Always']],
         ["4", "constraining_RCNP", "1", "1", "The editor works only on Monday, Wednesday, and on weekends.", "", "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3", "When does the editor work?", "Slider", ['Never', 'Always']],
@@ -307,6 +307,9 @@ var Experiment = function () {
             .attr("id", "check" + qNo);
         d3.select("#myForm" + qNo)
             .append("div")
+            .attr("id", "textarea" + qNo);
+        d3.select("#myForm" + qNo)
+            .append("div")
             .attr("id", "free" + qNo);
         d3.select("#myForm" + qNo)
             .append("span")
@@ -381,6 +384,14 @@ var Experiment = function () {
                 .append("input")
                 .attr("type", "text")
                 .attr("value", function(d) { return d; });
+        } else if (answertype == "Textarea") {
+            d3.select("#free" + qNo)
+                .selectAll("input")
+                .data(answers)
+                .enter()
+                .append("textarea")
+                .attr("class", "form-control")
+                .text(function(d) { return d; });
         } else if (answertype == "Radio") {
             d3.select("#radio" + qNo)
                 .selectAll("input")
