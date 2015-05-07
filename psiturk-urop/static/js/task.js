@@ -277,10 +277,12 @@ var Experiment = function () {
     var make_new_elements = function (qNo) {
         d3.select("#trial")
             .append("div")
+            .attr("class", "well")
             .attr("id", "trial" + qNo);
         d3.select("#trial" + qNo)
             .append("div")
-            .attr("id", "text" + qNo);
+            .attr("id", "text" + qNo)
+            .attr("class","page-header");
         d3.select("#trial" + qNo)
             .append("div")
             .attr("id", "picture" + qNo);
@@ -295,7 +297,8 @@ var Experiment = function () {
             .attr("id", "answers" + qNo);
         d3.select("#answers" + qNo)
             .append("form")
-            .attr("id", "myForm" + qNo);
+            .attr("id", "myForm" + qNo)
+            .attr("class", "form-group");
         d3.select("#myForm" + qNo)
             .append("div")
             .attr("id", "radio" + qNo);
@@ -313,6 +316,8 @@ var Experiment = function () {
             .append("input")
             .attr("id", "nextq" + qNo)
             .attr("type", "button")
+            .attr("class","btn btn-primary btn-lg")
+            .style({"margin":"25px"})
             .attr("value", "Next question");
     };
 
@@ -351,6 +356,8 @@ var Experiment = function () {
                 .append("img")
                 .attr("height", "250px")
                 .attr("src", function(d){return d;});
+            d3.select("#picture" + qNo)
+            	.append("hr");
         }
         if (audio != "") {
             d3.select("#audio" + qNo)
@@ -359,6 +366,8 @@ var Experiment = function () {
                 .attr("controls", "controls")
                 .append("source")
                 .attr("src", function(d){return d;});
+            d3.select("#audio" + qNo)   
+            	.append("hr");
         }
         d3.select("#question" + qNo)
             .data(jQuery.makeArray(question))
@@ -379,10 +388,12 @@ var Experiment = function () {
                 .enter()
                 .append('label')
                     .attr('for',function(d,i){ return qNo + 'a' + i; })
+                    .attr("class","radio-inline")
                     .text(function(d) { return d; })
                 .append("input")
                 .attr("type", "radio")
                 .attr("name", "radioanswer")
+                .attr("class","radio")
                 .attr("value", function(d) { return d; });
         } else if (answertype == "Check") {
             d3.select("#check" + qNo)
@@ -391,10 +402,12 @@ var Experiment = function () {
                 .enter()
                 .append('label')
                     .attr('for',function(d,i){ return qNo + 'a' + i; })
+                    .attr("class","checkbox-inline")
                     .text(function(d) { return d; })
                 .append("input")
                 .attr("type", "checkbox")
                 .attr("name", "checkboxanswer")
+            	.attr("class","checkbox")
                 .attr("value", function(d) { return d; });
         } else if (answertype == "Slider"){
             d3.select("#slider" + qNo)
@@ -456,7 +469,7 @@ var Questionnaire = function () {
 
     var record_responses = function () {
 
-        psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
 
         $('textarea').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
@@ -487,7 +500,7 @@ var Questionnaire = function () {
 
     // Load the questionnaire snippet 
     psiTurk.showPage('postquestionnaire.html');
-    psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
+    //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
     
     $("#next").click(function () {
         record_responses();

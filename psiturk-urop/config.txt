@@ -12,7 +12,7 @@ organization_name = New Great University
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
-database_url = sqlite:///participants.db
+database_url = sqlite:///swingtestnojunk.db
 table_name = turkdemo
 
 [Server Parameters]
