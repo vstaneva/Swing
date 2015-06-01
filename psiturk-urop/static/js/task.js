@@ -40,10 +40,6 @@ var instructionPages = [ // add as a list as many pages as you like
 *
 ********************/
 
-/********************
-* STROOP TEST       *
-********************/
-
 /**
  * Presents the experiment described in the input CSV file. This function does
  * not return a value.
@@ -79,6 +75,7 @@ var Experiment = function () {
 	 * -- "Radio" for radio buttons<br>
 	 * -- "Check" for checkboxes (multiple choice)<br>
 	 * -- "Free" for a textbox<br>
+	 * -- "Textarea" for a bigger textbox<br>
 	 * -- "Slider" for a jQuery UI slider. Note that the slider's left side is always 0
 	 *    and its right side is always 100<br>
 	 * [9]: answers --<br>
@@ -200,7 +197,7 @@ var Experiment = function () {
             ind += 1;
             display_question(ind, trial[0], trial[1], trial[2], trial[3], trial[4], trial[5],trial[6], trial[7], trial[8], trial[9]);
             askedTime = new Date().getTime();
-            $("#nextq" + ind).focus().click(function(){response_handler(ind);}); //the placeholder is never created after the double question
+            $("#nextq" + ind).focus().on("click", {item: trial[0], condition:trial[1], setNumber:trial[2], order:trial[3]}, response_handler);
         }
     };
     
@@ -219,11 +216,12 @@ var Experiment = function () {
 	 * @param {event} e -- the event that the button is clicked
 	 * @param {number} qNo -- the number of the question
 	 */
-    var response_handler = function (e, qNo) {
+    var response_handler = function (e) {
         var answered = false;
         if (last >= 0 && last <= 100) {
             answered = true;
-            //alert(last);
+            alert(last);
+            //this doesn't work yet --> i'll fix it when I figure out the 404 problem
             /*psiturk.recordTrialData({ //figure out how to record the data from the slider! :)
                 "phase": "test",
                 "item": trial[0],
@@ -234,16 +232,21 @@ var Experiment = function () {
                 "asked": askedTime
             });*/
         } else {
-        	$("input:checkbox:checked, input:radio:checked, input:text").each(function () {
-            	var sThisVal = $(this).val();
-            	psiTurk.recordTrialData({ //indices are incorrect! also we're not recording all we would ideally want to
-                	"phase": "test",
-                	"item": trial[0],
-                	"text": trial[1],
-                	"question": trial[2],
-                	"type": trial[3],
-                	"checked": sThisVal,
-                	"asked": askedTime
+        	
+        	//alert($(this).val());
+        	$("input:checkbox:checked, input:radio:checked, input:text, textarea").each(function () {
+        		//these should work just fine.
+            	alert($(this).data().item);
+        		alert($(this).data().condition);
+        		alert($(this).data().setnumber);
+        		alert($(this).data().order);
+            	psiTurk.recordTrialData({ 
+                	"item": $(this).data().item,
+                	"condition": $(this).data().condition,
+                	"set": $(this).data().setnumber,
+                	"order": $(this).data().order,
+                	"viewtime": (new Date().getTime())-askedTime,
+                	"answer": $(this).val()
             	});
             	answered = true;
         	});
@@ -263,6 +266,7 @@ var Experiment = function () {
 	 * @class finish
 	 */
     var finish = function () {
+    	remove_question();
         currentview = new Questionnaire();
     };
     
@@ -383,7 +387,11 @@ var Experiment = function () {
                 .enter()
                 .append("input")
                 .attr("type", "text")
-                .attr("value", function(d) { return d; });
+                .attr("value", function(d) { return d; })
+                .attr("data-item", item)
+                .attr("data-condition", cond)
+                .attr("data-setnumber", setNo)
+                .attr("data-order", order)
         } else if (answertype == "Textarea") {
             d3.select("#free" + qNo)
                 .selectAll("input")
@@ -391,7 +399,11 @@ var Experiment = function () {
                 .enter()
                 .append("textarea")
                 .attr("class", "form-control")
-                .text(function(d) { return d; });
+                .text(function(d) { return d; })
+                .attr("data-item", item)
+                .attr("data-condition", cond)
+                .attr("data-setnumber", setNo)
+                .attr("data-order", order);
         } else if (answertype == "Radio") {
             d3.select("#radio" + qNo)
                 .selectAll("input")
@@ -405,7 +417,11 @@ var Experiment = function () {
                 .attr("type", "radio")
                 .attr("name", "radioanswer")
                 .attr("class","radio")
-                .attr("value", function(d) { return d; });
+                .attr("value", function(d) { return d; })
+                .attr("data-item", item)
+                .attr("data-condition", cond)
+                .attr("data-setnumber", setNo)
+                .attr("data-order", order);
         } else if (answertype == "Check") {
             d3.select("#check" + qNo)
                 .selectAll("input")
@@ -419,9 +435,17 @@ var Experiment = function () {
                 .attr("type", "checkbox")
                 .attr("name", "checkboxanswer")
             	.attr("class","checkbox")
-                .attr("value", function(d) { return d; });
+                .attr("value", function(d) { return d; })
+                .attr("data-item", item)
+                .attr("data-condition", cond)
+                .attr("data-setnumber", setNo)
+                .attr("data-order", order);
         } else if (answertype == "Slider"){
             d3.select("#slider" + qNo)
+            	.attr("data-item", item)
+                .attr("data-condition", cond)
+                .attr("data-setnumber", setNo)
+                .attr("data-order", order)
                 .append("span")
                 .attr("id", "left")
                 .style({"float":"left", "padding":"15px"})
@@ -480,7 +504,7 @@ var Questionnaire = function () {
 
     var record_responses = function () {
 
-        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+        psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
 
         $('textarea').each( function(i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
@@ -511,7 +535,7 @@ var Questionnaire = function () {
 
     // Load the questionnaire snippet 
     psiTurk.showPage('postquestionnaire.html');
-    //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
+    psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
     
     $("#next").click(function () {
         record_responses();
