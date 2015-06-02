@@ -235,18 +235,16 @@ var Experiment = function () {
         	
         	//alert($(this).val());
         	$("input:checkbox:checked, input:radio:checked, input:text, textarea").each(function () {
-        		//these should work just fine.
-            	alert($(this).data().item);
-        		alert($(this).data().condition);
-        		alert($(this).data().setnumber);
-        		alert($(this).data().order);
+        		//these work just fine.
             	psiTurk.recordTrialData({ 
-                	"item": $(this).data().item,
-                	"condition": $(this).data().condition,
-                	"set": $(this).data().setnumber,
-                	"order": $(this).data().order,
-                	"viewtime": (new Date().getTime())-askedTime,
-                	"answer": $(this).val()
+            		'phase':'experiment',
+                	'item': $(this).data().item,
+                	'condition': $(this).data().condition,
+                	'set': $(this).data().setnumber,
+                	'order': $(this).data().order,
+                	'viewtime': (new Date().getTime())-askedTime,
+                	'answer': $(this).val()
+                	
             	});
             	answered = true;
         	});
@@ -267,6 +265,7 @@ var Experiment = function () {
 	 */
     var finish = function () {
     	remove_question();
+    	psiTurk.recordTrialData({'phase':'experiment', 'status':'submit'});
         currentview = new Questionnaire();
     };
     
@@ -489,6 +488,7 @@ var Experiment = function () {
     };
 
     psiTurk.showPage("stage.html");
+    psiTurk.recordTrialData({'phase':'experiment', 'status':'begin'});
     shuffle_trials(); 
     next();
     
