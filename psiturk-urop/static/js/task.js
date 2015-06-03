@@ -178,7 +178,7 @@ var Experiment = function () {
         }
     };
     
-    var ind = 0, askedTime, trial, last = -1;
+    var ind = 0, askedTime, trial, last = -1, slideritem = -1, slidercondition = -1, slidersetnumber = -1, sliderorder = -1;
     
     /**
  	 * Display the next questions. This function is responsible only
@@ -219,18 +219,17 @@ var Experiment = function () {
     var response_handler = function (e) {
         var answered = false;
         if (last >= 0 && last <= 100) {
+        	//these are working alright now
+            psiTurk.recordTrialData({
+                'phase':'experiment',
+                'item': slideritem,
+                'condition': slidercondition,
+                'set': slidersetnumber,
+                'order': sliderorder,
+                'viewtime': (new Date().getTime())-askedTime,
+                'answer': last
+            });
             answered = true;
-            alert(last);
-            //this doesn't work yet --> i'll fix it when I figure out the 404 problem
-            /*psiturk.recordTrialData({ //figure out how to record the data from the slider! :)
-                "phase": "test",
-                "item": trial[0],
-                "text": trial[1],
-                "question": trial[2],
-                "type": trial[3],
-                "checked": last,
-                "asked": askedTime
-            });*/
         } else {
         	
         	//alert($(this).val());
@@ -453,6 +452,10 @@ var Experiment = function () {
                     {
                     slide: function(event, ui) {
                         last = ui.value;
+                        slideritem = item;
+                        slidercondition = cond;
+                        slidersetnumber = setNo;
+                        sliderorder = order;
                     }   
                 });
             d3.select("#slider" + qNo)

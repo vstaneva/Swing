@@ -1,0 +1,21 @@
+ITEM,CONDITION,SET,ORDER,VIEWTIME,ANSWER
+3,constraining_NP2,1,1,1871,Maybe
+3,constraining_NP2,2,1,2382,2
+3,constraining_NP2,2,1,2383,Please write your story here
+2,unconstraining_NP2,1,1,1413,No
+4,unconstraining_NP2,1,1,1908,75
+1,constraining_NP2,1,1,1128,No
+5,constraining_RCNP,1,1,1858,64
+4,constraining_RCNP,1,1,1422,65
+3,unconstraining_NP2,1,1,1348,No
+3,unconstraining_NP2,2,1,1811,2
+3,unconstraining_NP2,2,1,1812,Please write your story here
+1,unconstraining_NP2,1,1,2120,Maybe
+2,constraining_RCNP,1,1,1475,Maybe
+1,constraining_RCNP,1,1,1625,Maybe
+2,constraining_NP2,1,1,1702,Yes
+3,unconstraining_RCNP,1,1,1207,No
+3,unconstraining_RCNP,2,1,2314,77
+3,unconstraining_RCNP,2,1,2314,Please write your story here
+5,constraining_RCNP,1,1,1992,56
+4,unconstraining_NP2,1,1,1452,57
