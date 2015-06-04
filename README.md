@@ -32,23 +32,23 @@ Input file
 Please use the following convention for describing your experiment as a CSV file.
 The following columns are specified, in this order:
 * item
-	 * condition
-	 * set
-	 * order
-	 * text prompt ("" if no text prompt)
-	 * picture prompt ("" if no picture prompt)
-	 * audio prompt ("" if no audio prompt)
-	 * question<br>
-	 * answer type -- can be any of the following:
-	     * "Radio" for radio buttons
-	     * "Check" for checkboxes (multiple choice)
-	     * "Free" for a textbox
-	     * "Textarea" for a bigger textbox
-	     * "Slider" for a jQuery UI slider. Note that the slider's left side is always 0 and its right side is always 100<br>
-	 * answers
-	     * for "Radio" and "Check", the options that the participant can choose among<br>
-	     * for "Free" and "Textarea", suggested text that can be filled in.<br>
-	     * for "Slider", the labels on the left and right side of the slider.<p>
+* condition
+* set
+* order
+* text prompt ("" if no text prompt)
+* picture prompt ("" if no picture prompt)
+* audio prompt ("" if no audio prompt)
+* question<br>
+* answer type -- can be any of the following:
+ * "Radio" for radio buttons
+ * "Check" for checkboxes (multiple choice)
+ * "Free" for a textbox
+ * "Textarea" for a bigger textbox
+ * "Slider" for a jQuery UI slider. Note that the slider's left side is always 0 and its right side is always 100
+* answers
+ * for "Radio" and "Check", the options that the participant can choose among.
+ * for "Free" and "Textarea", suggested text that can be filled in.
+ * for "Slider", the labels on the left and right side of the slider.
 
 The file inputexample.csv provides a guideline for what the input file should look like.
 
