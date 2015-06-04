@@ -10,8 +10,8 @@ Getting started
 
 Tutorial
 -------
-1. Describe your experiment in CSV format. Swing will expect a CSV file that looks exactly like inputexample.csv from the example. Please use the format described in [[Input file]]
-2. Run CSVtoJS.py on your input file #todo:make this easy, without the need to open the code... hm.
+1. Describe your experiment in CSV format. Swing will expect a CSV file that looks exactly like inputexample.csv from the example. Please use the format described in ([Input file])
+2. Run CSVtoJS.py on your input file
 3. Set up the PsiTurk server and run the experiment! http://psiturk.org/quick_start/
 4. After running the experiment, collect the data with download_datafiles on the PsiTurk server
 5. Run dbCSVparser.py to get nicer-looking results from trialdata.csv. The parsed result is produced in parsedtrialresults.csv
@@ -40,16 +40,24 @@ The following columns are specified, in this order:
 * audio prompt ("" if no audio prompt)
 * question<br>
 * answer type -- can be any of the following:
- * "Radio" for radio buttons
- * "Check" for checkboxes (multiple choice)
- * "Free" for a textbox
- * "Textarea" for a bigger textbox
- * "Slider" for a jQuery UI slider. Note that the slider's left side is always 0 and its right side is always 100
+  * "Radio" for radio buttons
+  * "Check" for checkboxes (multiple choice) 
+  * "Free" for a textbox
+  * "Textarea" for a bigger textbox
+  * "Slider" for a jQuery UI slider. Note that the slider's left side is always 0 and its right side is always 100
 * answers
- * for "Radio" and "Check", the options that the participant can choose among.
- * for "Free" and "Textarea", suggested text that can be filled in.
- * for "Slider", the labels on the left and right side of the slider.
+  * for "Radio" and "Check", the options that the participant can choose among.
+  * for "Free" and "Textarea", suggested text that can be filled in.
+  * for "Slider", the labels on the left and right side of the slider.
 
 The file inputexample.csv provides a guideline for what the input file should look like.
 
-#TODO: actually create an inputexample csv file!
+To-do list
+---------
+- [ ] create an inputexample csv file
+- [ ] put everything a directory up
+- [ ] clean up from unused files
+- [ ] improve the developers documentation
+- [ ] make all the paths relative so others can actually use them!
+- [ ] make it so we're able to run the CSVtoJS script without going to the code
+- [ ] make an installer or sth? idk.
