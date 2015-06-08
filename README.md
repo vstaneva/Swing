@@ -54,10 +54,11 @@ The file inputexample.csv provides a guideline for what the input file should lo
 
 To-do list
 ---------
-- [ ] create an inputexample csv file
-- [ ] put everything a directory up
-- [ ] clean up from unused files
+- [x] create an example input csv file
+- [x] put everything a directory up
+- [x] clean up from unused files
 - [ ] improve the developers documentation
-- [ ] make all the paths relative so others can actually use them!
-- [ ] make it so we're able to run the CSVtoJS script without going to the code
+- [x] make all the paths relative so others can actually use them!
+- [x] make it so we're able to run the CSVtoJS script without going to the code
+- [ ] make a secondary results parser that includes item, condition, etc.
 - [ ] make an installer or sth? idk.

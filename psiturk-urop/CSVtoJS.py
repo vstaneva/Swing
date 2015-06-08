@@ -30,20 +30,20 @@ def CSVtoJS(stuffing, path):
     istimetowrite = 0
     for line in fileinput.input(path, inplace=1):
     	if (istimetowrite == 1):
-    		print ('\tvar trials = [\n'),
+    		print ('\tvar experimentTrials = [\n'),
     		for trial in stuffing:
-    			(s, o) = trial[4].split(',',1)
-        		print ('\t\t["%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", %s],\n'%(trial[1],trial[2],s,o, trial[3], trial[12], trial[13], trial[6], trial[7], parseAns(trial[8]))),
-    		print ('\t];\n'),
+    			(s, o) = trial[2].split(',',1)
+        		print ('\t\t["%s", "%s", "%s", "%s","%s", "%s", "%s", "%s", "%s", %s],\n'%(trial[0],trial[1],s,o, trial[3],  trial[4], trial[5], trial[6], trial[7], parseAns(trial[8]))),
+    		print ('\t];\n'),line,
     		istimetowrite = 2
     	else:
     		print line,
-    	if line.startswith('var Experiment = function() {'):
+    	if line.startswith('var Experiment = function () {'):
     		istimetowrite = istimetowrite+1
 
 
 ######THIS RUNS EVERYTHING######
-tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/csv_example_val.csv")
-JSfilepath = "/Users/val/Documents/UROP-Fall2015/urop/psiturk-urop/static/js/"
-CSVtoJS(tasklist, JSfilepath+"task1.js")
+tasklist = parseCSV("input.csv")
+JSfilepath = "static/js/"
+CSVtoJS(tasklist, JSfilepath+"task.js")
 

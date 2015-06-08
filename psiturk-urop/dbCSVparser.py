@@ -20,14 +20,14 @@ def parseCSV (path):
 ######Write CSV#######
 def writeCSV(resultlist, path):
     """Takes the cleaned experiment information and writes it in a new CSV file."""
-	with open(path, 'wb') as csvfile:
-		writer = csv.writer(csvfile)
-		writer.writerow(['ITEM', 'CONDITION','SET', 'ORDER', 'VIEWTIME', 'ANSWER'])
-		for result in resultlist:
-			writer.writerow([result['item'], result['condition'], result['set'], result['order'], result['viewtime'], result['answer']])
+    with open(path, 'wb') as csvfile:
+    	writer = csv.writer(csvfile)
+    	writer.writerow(['ITEM', 'CONDITION','SET', 'ORDER', 'VIEWTIME', 'ANSWER'])
+    	for result in resultlist:
+    		writer.writerow([result['item'], result['condition'], result['set'], result['order'], result['viewtime'], result['answer']])
 		
 
 
 ######THIS RUNS EVERYTHING######
-tasklist = parseCSV("/Users/val/Documents/UROP-Fall2015/urop/psiturk-urop/trialdata.csv")
-writeCSV(tasklist, "/Users/val/Documents/UROP-Fall2015/urop/psiturk-urop/parsedtrialresults.csv")
+tasklist = parseCSV("trialdata.csv")
+writeCSV(tasklist, "parsedtrialresults.csv")
